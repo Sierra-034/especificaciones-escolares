@@ -1,0 +1,20 @@
+name: Historia de usuario
+description: Propón algo que el sistema debería hacer. No hace falta saber programar.
+title: "Historia: "
+labels: [historia]
+body:
+  - type: input
+    id: como
+    attributes: { label: Como…, description: "¿Quién? Por ejemplo: alumna de 5.º semestre, control escolar" }
+    validations: { required: true }
+  - type: textarea
+    id: quiero
+    attributes: { label: Quiero…, description: "¿Qué necesitas poder hacer?" }
+    validations: { required: true }
+  - type: textarea
+    id: para
+    attributes: { label: Para…, description: "¿Para qué te sirve?" }
+    validations: { required: true }
+  - type: input
+    id: escuela
+    attributes: { label: Escuela o plantel (opcional) }

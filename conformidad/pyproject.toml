@@ -1,0 +1,19 @@
+[project]
+name = "conformidad-escolar"
+version = "0.2.0"
+requires-python = ">=3.11"
+dependencies = ["pytest>=8", "httpx>=0.27"]
+
+[tool.pytest.ini_options]
+testpaths = ["pruebas"]
+markers = [
+  "prueba(id): ID de la prueba en la especificación, p. ej. C-26",
+  "lenta: prueba que espera tiempos o límites",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = []

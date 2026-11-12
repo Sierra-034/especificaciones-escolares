@@ -1,0 +1,28 @@
+site_name: Especificaciones escolares
+site_url: https://Sierra-034.github.io/especificaciones-escolares/
+repo_url: https://github.com/Sierra-034/especificaciones-escolares
+edit_uri: edit/main/docs/
+docs_dir: docs
+exclude_docs: |
+  _plantilla*.md
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.sections
+    - content.action.edit
+markdown_extensions:
+  - tables
+  - admonition
+  - toc:
+      permalink: true
+nav:
+  - Inicio: index.md
+  - Principios: principios.md
+  - Historias: historias/index.md
+  - Especificaciones:
+      - Índice: especificaciones/index.md
+      - ESP-IDP Identidad: especificaciones/ESP-IDP.md
+      - ESP-CON Constancias: especificaciones/ESP-CON.md
+      - ESP-PLA Acceso al plantel: especificaciones/ESP-PLA.md
+  - Decisiones (ADR): adr/index.md

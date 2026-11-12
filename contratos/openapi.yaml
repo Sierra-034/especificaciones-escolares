@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  title: Especificaciones escolares
+  version: 0.2.0
+  description: |
+    Contrato HTTP del estándar. Esqueleto inicial: faltan esquemas y errores,
+    por migrar desde ESP-CON v0.2 e ESP-IDP 0.1.
+paths:
+  /v0/auth/codigo:
+    post:
+      summary: Pedir un código de un solo uso (ESC-61, ADR-0009)
+      responses:
+        "202": { description: Siempre 202, exista o no el contacto en el padrón. }
+        "429": { description: demasiadas-solicitudes }
+  /v0/constancias/{folio}:
+    get:
+      summary: Verificar una constancia por folio (ESC-07, ADR-0008)
+      parameters:
+        - { name: folio, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Datos públicos de la constancia y su estado. }
+        "404": { description: Folio inexistente. }
+  /.well-known/jwks.json:
+    get:
+      summary: Llaves públicas del plantel (ESC-63)
+      responses:
+        "200": { description: JWKS con llaves vigentes y retiradas (solo verificación). }

@@ -26,3 +26,13 @@ nav:
       - ESP-CON Constancias: especificaciones/ESP-CON.md
       - ESP-PLA Acceso al plantel: especificaciones/ESP-PLA.md
   - Decisiones (ADR): adr/index.md
+  - Proceso:
+      - Manual: proceso/index.md
+      - 0 · Preparar tu equipo: proceso/0-preparar-equipo.md
+      - A · Proponer un cambio: proceso/A-proponer-cambio.md
+      - B · Publicar una versión: proceso/B-publicar-version.md
+      - C · Fijar la versión: proceso/C-fijar-version.md
+      - D · Corregir una versión: proceso/D-corregir-version.md
+  - Retrospectivas:
+      - Índice: retrospectivas/index.md
+      - 2026-11-13 · Arranque: retrospectivas/2026-11-13.md

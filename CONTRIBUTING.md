@@ -1,5 +1,7 @@
 # Cómo contribuir
 
+Paso a paso, con requisitos previos y qué hace cada comando: [Manual del proceso](docs/proceso/index.md).
+
 ## Proponer una historia nueva
 Abre un *issue* con la plantilla «Historia de usuario» (Como / Quiero / Para).
 No hace falta saber programar. Si se acepta, se le asigna el siguiente ID libre y entra como archivo en `docs/historias/`.

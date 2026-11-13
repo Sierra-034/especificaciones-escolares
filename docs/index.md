@@ -7,6 +7,8 @@ la dirección aprueba los requisitos en lenguaje llano y de ahí salen los contr
 - [Historias de usuario](historias/index.md)
 - [Especificaciones](especificaciones/index.md)
 - [Decisiones de diseño](adr/index.md)
+- [Manual del proceso](proceso/index.md)
+- [Retrospectivas](retrospectivas/index.md)
 
 **Camino de trabajo:** problema y principios → historias → paquete cerrado bajo «depende de» →
 especificación y pruebas → implementación de referencia → piloto → vuelta.

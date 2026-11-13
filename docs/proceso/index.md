@@ -47,3 +47,21 @@ Varios PCE se acumulan en `main`; una versión es una foto de `main` en un momen
 2. Una etiqueta publicada nunca se mueve ni se borra. Si algo faltó, se publica otra versión (procedimiento D).
 3. Antes de etiquetar, el CHANGELOG lista cada PCE que entra en la versión.
 4. Una ADR aceptada no se edita: se escribe otra que la reemplaza.
+
+## Procedimientos por agregar
+
+!!! note "Esto es una lista de intenciones, no de procedimientos"
+    Ninguno de estos procedimientos está escrito todavía. Si los necesitas hoy, no
+    existen: sigue el más cercano de la tabla de arriba y anota lo que hiciste. Cada uno
+    se escribe con un PCE (procedimiento A) cuando llegue su momento, y entonces pasa a
+    la tabla «¿Qué quieres hacer?».
+
+| Letra | Procedimiento | Se escribe cuando |
+|---|---|---|
+| E | Revisar un PCE de alguien más (lista de revisión antes de aprobar) | haya más colaboradores |
+| F | Resolver un conflicto de fusión en `main` | haya más colaboradores |
+| G | Deprecar una historia o una especificación sin borrarla | el estándar madure |
+| H | Publicar una versión mayor (v1.0.0) con notas de migración | el estándar madure |
+| I | Correr las pruebas de conformidad localmente antes de abrir un PR | llegue la implementación |
+| J | Reportar un error contra una versión publicada (issue → PCE de corrección) | llegue la implementación |
+| K | Incorporar un plantel nuevo (clonar, configurar, verificar) | el proyecto tenga piloto |

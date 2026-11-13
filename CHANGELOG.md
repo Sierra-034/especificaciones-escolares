@@ -2,6 +2,9 @@
 
 Formato: una sección por etiqueta publicada.
 
-## Sin publicar
-- Estructura inicial del repositorio.
-- Migración pendiente: catálogo de historias, ESP-IDP 0.1, ESP-CON 0.2, ESP-PLA 0.1, ADR 0001–0005, 0008, 0009.
+## esp-con-v0.2.0 — 2026-11-13
+- Primera versión publicada del estándar.
+- ESP-CON v0.2 (constancias): 8 historias, pruebas C-26 a C-50 en texto.
+- ESP-IDP 0.1 y ESP-PLA 0.1 en borrador.
+- ADR 0001–0005, 0008 y 0009; historias del catálogo migradas a docs/historias/.
+- Pendiente: contrato OpenAPI completo, pruebas de conformidad en código, separar ESP-IDP de ESP-PLA.

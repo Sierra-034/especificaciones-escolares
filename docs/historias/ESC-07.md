@@ -20,7 +20,7 @@ Como **tercero que recibe una constancia** (una beca, una empresa, otra escuela)
 
 ## Pruebas de conformidad
 
-- C-38 a C-42, C-46, C-47 (de ESP-CON v0.2; el catálogo de origen decía «por definir»)
+- C-38 a C-42, C-46, C-47, C-53, C-55, C-56 (de ESP-CON v0.3; el catálogo de origen decía «por definir»)
 
 ## Relaciones
 

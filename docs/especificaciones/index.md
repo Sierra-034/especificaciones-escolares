@@ -6,9 +6,11 @@
 
 | ID | Archivo | Versión |
 |---|---|---|
-| ESP-IDP | [ESP-IDP.md](ESP-IDP.md) (el texto vive por ahora en ESP-PLA.md) | 0.1 |
-| ESP-PLA | [ESP-PLA.md](ESP-PLA.md) | 0.1 |
-| ESP-CON | [ESP-CON.md](ESP-CON.md) | 0.2 |
+| ESP-IDP | [ESP-IDP.md](ESP-IDP.md) (el texto v0.1 vive por ahora en ESP-PLA.md) | 0.2 |
+| ESP-PLA | [ESP-PLA.md](ESP-PLA.md) | 0.2 |
+| ESP-CON | [ESP-CON.md](ESP-CON.md) | 0.3 |
+
+Lo que se encontró y todavía no se resuelve está en [Pendientes conocidos](pendientes.md).
 
 Los enlaces de las tablas de abajo apuntan todavía a las fuentes originales.
 
@@ -41,7 +43,7 @@ Reglas básicas:
 
 ESP-IDP y ESP-PLA viven por ahora en un mismo documento, «Especificación v0.1», y se separan al pasar al repositorio. Antes se llamaban juntas ESP-ACC. ESP-CON tiene documento propio.
 
-**Criterio de adopción de ESP-CON:** nivel 2 = ESC-44, 19, 63, 61, 08, 05; nivel 3 = nivel 2 + ESC-07, 62. ESC-44, 19, 61 y 63 son de Identidad: ESP-CON las exige, no es su dueña. ESC-61 (identificación sin contraseña) y ESC-63 (llaves de firma) se especifican por ahora dentro de ESP-CON, con sus pruebas C-26 a C-30 y C-48 a C-50, y pasan a ESP-IDP en su versión 0.2.
+**Criterio de adopción de ESP-CON:** nivel 2 = ESC-44, 19, 63, 61, 08, 05; nivel 3 = nivel 2 + ESC-07, 62. ESC-44, 19, 61 y 63 son de Identidad: ESP-CON las exige, no es su dueña. ESC-61 (identificación sin contraseña) y ESC-63 (llaves de firma) se especifican por ahora dentro de ESP-CON, con sus pruebas C-26 a C-30, C-48 a C-50, C-52 y C-57, y pasan a ESP-IDP en su versión 0.3.
 
 **ESP-COM** todavía no es un documento aparte. Sus reglas (identidad y roles, IDs UUIDv7, horas en UTC, texto en NFC, errores Problem Details, autenticación OIDC, idempotencia, versiones) viven hoy en la sección «Alcance y convenciones» del documento de la especificación v0.1. ESP-CON, la segunda especificación con documento propio, ya repite varias de ellas (UTC, NFC) en sus convenciones: el disparador se cumplió y toca separarlas.
 

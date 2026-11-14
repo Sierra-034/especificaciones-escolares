@@ -20,7 +20,7 @@ Como **responsable de protección de datos**, quiero **que cada rol vea solo la 
 
 ## Pruebas de conformidad
 
-- C-19
+- C-19, C-51
 
 ## Relaciones
 

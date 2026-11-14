@@ -25,6 +25,7 @@ nav:
       - ESP-IDP Identidad: especificaciones/ESP-IDP.md
       - ESP-CON Constancias: especificaciones/ESP-CON.md
       - ESP-PLA Acceso al plantel: especificaciones/ESP-PLA.md
+      - Pendientes conocidos: especificaciones/pendientes.md
   - Decisiones (ADR): adr/index.md
   - Proceso:
       - Manual: proceso/index.md

@@ -4,7 +4,7 @@ info:
   version: 0.2.0
   description: |
     Contrato HTTP del estándar. Esqueleto inicial: faltan esquemas y errores,
-    por migrar desde ESP-CON v0.2 e ESP-IDP 0.1.
+    por migrar desde ESP-CON v0.3 y ESP-IDP 0.2.
 paths:
   /v0/auth/codigo:
     post:
@@ -12,16 +12,18 @@ paths:
       responses:
         "202": { description: Siempre 202, exista o no el contacto en el padrón. }
         "429": { description: demasiadas-solicitudes }
-  /v0/constancias/{folio}:
+  /v0/verificar/{folio}:
     get:
-      summary: Verificar una constancia por folio (ESC-07, ADR-0008)
+      summary: Verificar una constancia por folio, sin cuenta (ESC-07, ADR-0008)
       parameters:
         - { name: folio, in: path, required: true, schema: { type: string } }
       responses:
-        "200": { description: Datos públicos de la constancia y su estado. }
-        "404": { description: Folio inexistente. }
-  /.well-known/jwks.json:
+        "200": { description: "resultado valida o vencida, con la JWS y los datos visibles." }
+        "404": { description: folio-no-encontrado }
+        "410": { description: "constancia-anulada, con resultado anulada y los datos visibles." }
+        "429": { description: demasiadas-solicitudes }
+  /v0/llaves:
     get:
-      summary: Llaves públicas del plantel (ESC-63)
+      summary: Llaves públicas del plantel en JWKS (ESC-63, ADR-0010, ADR-0011)
       responses:
-        "200": { description: JWKS con llaves vigentes y retiradas (solo verificación). }
+        "200": { description: "Llaves que firman hoy y rotadas con algo vigente; nunca revocadas. Todas con use sig." }

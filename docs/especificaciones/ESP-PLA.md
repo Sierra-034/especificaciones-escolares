@@ -1,13 +1,15 @@
 ---
 id: ESP-PLA
-version: 0.1.0
+version: 0.2.0
 estado: borrador
 ---
-# ESP-PLA · Acceso al plantel (v0.1, junto con ESP-IDP)
+# ESP-PLA · Acceso al plantel (v0.2, junto con ESP-IDP)
 
 > Migrado el 2026-11-13 desde [Especificación v0.1: subsistema de acceso escolar](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ) (fecha del original: 2026-11-10). Texto copiado sin cambios; la fuente de verdad desde ahora es este archivo.
 
 > **Nota de migración.** La fuente cubre ESP-IDP y ESP-PLA en un mismo documento y dice que se separan al pasar al repositorio. Separarlas cambia qué sección pertenece a cuál, así que se deja como decisión de Samuel (PCE aparte). Mientras tanto el texto completo vive aquí y [ESP-IDP](ESP-IDP.md) apunta a sus secciones.
+
+**Versión 0.2 (2026-11-13).** El campo `rol` de la credencial pasa a llamarse `tipo`, para no confundirlo con los roles de la plataforma, que ahora viven en el [catálogo de roles de ESP-IDP](ESP-IDP.md#catalogo-de-roles) (ADR-0012). C-19 usa los nombres de ese catálogo. `GET /v0/llaves` queda como la ruta oficial del JWKS (ADR-0010).
 
 ## Alcance y convenciones
 
@@ -62,7 +64,7 @@ La credencial es un JWS compacto (RFC 7515) firmado por el servidor del plantel 
 | `iat` | Fecha de emisión | DEBE |
 | `nbf` | Válida desde (inicio del semestre) | DEBE |
 | `exp` | Válida hasta (fin del semestre) | DEBE |
-| `rol` | `alumno`, `personal` o `visitante` | DEBE |
+| `tipo` | Tipo de persona: `alumno`, `personal` o `visitante`. No es un rol de la plataforma (ESP-IDP). | DEBE |
 | `v` | Versión de esta especificación | DEBE |
 
 **Llaves.** El servidor guarda la llave privada; los dispositivos reciben solo las públicas, identificadas por `kid`. Una llave nueva DEBE publicarse antes de usarse para firmar, y la anterior DEBE seguir publicada hasta que venza la última credencial que firmó.
@@ -130,7 +132,7 @@ La API tiene operaciones para dos tipos de cliente: los dispositivos de la puert
 | --- | --- | --- |
 | Enviar hechos | `POST /v0/hechos` | Recibe un lote de hasta 500 hechos; responde por cada uno `aceptado`, `duplicado`, `en_revision` o `rechazado` |
 | Bajar revocadas | `GET /v0/revocadas?desde=<cursor>` | Devuelve los `jti` revocados desde el cursor y un cursor nuevo |
-| Bajar llaves | `GET /v0/llaves` | Llaves públicas vigentes en formato JWKS (RFC 7517) |
+| Bajar llaves | `GET /v0/llaves` | Llaves públicas en formato JWKS (RFC 7517): las que firman hoy y las rotadas que aún tienen algo vigente firmado; nunca las revocadas. Ruta pública y estable (ADR-0010, ADR-0011) |
 | Bajar padrón de puerta | `GET /v0/padron-puerta?desde=<cursor>` | Cambios de `sub`, nombre y grupo desde el cursor |
 | Bajar configuración | `GET /v0/configuracion` | Configuración efectiva del punto de acceso del dispositivo |
 | Latido | `POST /v0/latido` | El dispositivo avisa que está vivo, con su hora y hechos pendientes |
@@ -235,7 +237,7 @@ Una implementación cumple v0.1 si pasa todas estas pruebas. Cada prueba tiene u
 | C-16 | Servidor | Deshabilitar el acceso vehicular | El punto deja de aparecer en la configuración efectiva y el cambio queda registrado | ESC-43 |
 | C-17 | Servidor | Exportación completa | Todos los hechos, el padrón y la configuración salen en JSON y CSV sin pérdida | ESC-48 |
 | C-18 | Ambos | Nombre con acento compuesto de dos formas distintas | Se guardan y comparan igual tras normalizar a NFC | ESC-44 |
-| C-19 | Servidor | Una persona con rol de personal de acceso pide `GET /entradas` | 403 con Problem Details; con rol de dirección responde y la consulta queda anotada con quién y cuándo | ESC-19 |
+| C-19 | Servidor | Una persona con rol `personal_acceso` pide `GET /entradas` | 403 con Problem Details; con rol `direccion` responde y la consulta queda anotada con quién y cuándo | ESC-19 |
 | C-20 | App del alumno | Credencial ya guardada y teléfono en modo avión | Muestra el QR y el escáner lo valida como `valida`; el QR no contiene nombre, CURP ni foto | ESC-38 |
 | C-21 | Escáner | Alumno sin QR que pasa con la revisión de siempre | Hecho de tipo `manual` con decisión `entra`; no se exige credencial | ESC-39 |
 | C-22 | Servidor | Punto de acceso sin latido por más del intervalo configurado y sin entradas | El tablero lo marca «sin señal», distinto de «nadie ha entrado» | ESC-40 |

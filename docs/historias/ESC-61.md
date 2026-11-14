@@ -19,7 +19,7 @@ Como **alumno o persona del personal**, quiero **entrar a la plataforma con un c
 
 ## Pruebas de conformidad
 
-- C-26 a C-30, C-48 a C-50 (de ESP-CON v0.2; el catálogo de origen decía «por definir»)
+- C-26 a C-30, C-48 a C-50, C-52, C-57 (de ESP-CON v0.3; el catálogo de origen decía «por definir»)
 
 ## Relaciones
 

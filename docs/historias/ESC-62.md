@@ -18,7 +18,7 @@ Como **control escolar**, quiero **anular una constancia emitida por error**, pa
 
 ## Pruebas de conformidad
 
-- C-43, C-44 (de ESP-CON v0.2; el catálogo de origen decía «por definir»)
+- C-43, C-44, C-54 (de ESP-CON v0.3; el catálogo de origen decía «por definir»)
 
 ## Relaciones
 

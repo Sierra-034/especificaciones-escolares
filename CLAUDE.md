@@ -27,7 +27,7 @@ Un PCE (propuesta de cambio al estándar) es un *pull request*. Nunca hagas comm
 - **Contrato primero.** Un endpoint, esquema o error nuevo se escribe en `contratos/openapi.yaml`
   antes que cualquier código (principio 12).
 - **IDs.** Historias `ESC-NN`, `UNI-NN`, `DOC-NN`; pruebas `C-NN`, únicas en todo el estándar
-  (siguiente libre: C-51); ADR `NNNN`. Un ID retirado no se reutiliza.
+  (siguiente libre: C-58); ADR `NNNN`. Un ID retirado no se reutiliza.
 - **Historias.** Un archivo por ID en `docs/historias/`, con el encabezado YAML de `_plantilla.md`.
   `depende_de` solo puede nombrar historias que existen, sin ciclos.
 - **Versiones.** Cada especificación se etiqueta por separado: `esp-<id>-vX.Y.Z` (p. ej. `esp-con-v0.2.0`).

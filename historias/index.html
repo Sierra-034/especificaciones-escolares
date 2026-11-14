@@ -1,0 +1,2223 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://Sierra-034.github.io/especificaciones-escolares/historias/">
+      
+      
+        <link rel="prev" href="../principios/">
+      
+      
+        <link rel="next" href="../especificaciones/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Historias - Especificaciones escolares</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#historias-de-usuario" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Especificaciones escolares" class="md-header__button md-logo" aria-label="Especificaciones escolares" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Especificaciones escolares
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Historias
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Sierra-034/especificaciones-escolares" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Especificaciones escolares" class="md-nav__button md-logo" aria-label="Especificaciones escolares" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Especificaciones escolares
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Sierra-034/especificaciones-escolares" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../principios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Historias
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Historias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reglas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reglas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formato-de-una-historia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formato de una historia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subsistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subsistemas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-de-constancias-plan-de-construccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVP de constancias: plan de construcción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-de-puerta-plan-de-construccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVP de puerta: plan de construcción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dos-mvp-posibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dos MVP posibles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identidad-y-acceso-a-la-plataforma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identidad y acceso a la plataforma
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acceso-al-plantel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceso al plantel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constancias-y-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constancias y verificación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacion-entre-escuelas-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunicación entre escuelas (propuesto)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gobierno-institucional-por-migrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gobierno institucional (por migrar)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#orden-de-construccion-del-mvp-de-puerta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orden de construcción del MVP de puerta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trazabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trazabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pendientes-de-migracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pendientes de migración
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Especificaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Especificaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../especificaciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../especificaciones/ESP-IDP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-IDP Identidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../especificaciones/ESP-CON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-CON Constancias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../especificaciones/ESP-PLA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-PLA Acceso al plantel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../especificaciones/pendientes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendientes conocidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisiones (ADR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proceso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proceso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proceso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proceso/0-preparar-equipo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0 · Preparar tu equipo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proceso/A-proponer-cambio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A · Proponer un cambio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proceso/B-publicar-version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B · Publicar una versión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proceso/C-fijar-version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C · Fijar la versión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proceso/D-corregir-version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D · Corregir una versión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectivas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Retrospectivas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../retrospectivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../retrospectivas/2026-11-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-11-13 · Arranque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reglas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reglas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formato-de-una-historia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formato de una historia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subsistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subsistemas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-de-constancias-plan-de-construccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVP de constancias: plan de construcción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-de-puerta-plan-de-construccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVP de puerta: plan de construcción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dos-mvp-posibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dos MVP posibles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identidad-y-acceso-a-la-plataforma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identidad y acceso a la plataforma
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acceso-al-plantel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceso al plantel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constancias-y-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constancias y verificación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacion-entre-escuelas-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunicación entre escuelas (propuesto)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gobierno-institucional-por-migrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gobierno institucional (por migrar)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#orden-de-construccion-del-mvp-de-puerta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orden de construcción del MVP de puerta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trazabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trazabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pendientes-de-migracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pendientes de migración
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/Sierra-034/especificaciones-escolares/edit/main/docs/historias/index.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="historias-de-usuario">Historias de usuario<a class="headerlink" href="#historias-de-usuario" title="Permanent link">&para;</a></h1>
+<p>Esta carpeta es la <strong>fuente única</strong> de las historias de usuario del sistema escolar (principio 14): una historia por archivo, con su ID como nombre (<code>ESC-05.md</code>). Las especificaciones citan en cada prueba la historia que verifica, y el documento de diseño del MVP cita solo IDs. Una historia nueva se agrega copiando <code>_plantilla.md</code> de esta carpeta, y todo cambio entra por PCE. <code>python herramientas/verificar_catalogo.py</code> revisa que cada <code>id</code> coincida con su archivo, que cada «depende de» exista y que no haya ciclos.</p>
+<p>Migrado el 2026-11-13 desde el <a href="https://claude.ai/artifact/VpPd8871SMYP2wGqVQisJE">Catálogo de historias de usuario</a>, que deja de ser la fuente. El catálogo exploratorio <a href="https://claude.ai/artifact/KSZ7BP3o9FMvjVi9VHave3">Sistema educativo</a> queda como referencia de origen de los subsistemas que faltan por migrar.</p>
+<h2 id="reglas">Reglas<a class="headerlink" href="#reglas" title="Permanent link">&para;</a></h2>
+<p>Cada historia es un bloque de funcionalidad, y el catálogo se lee como conjuntos y relaciones:</p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Estructura</th>
+<th>Regla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Catálogo</td>
+<td>Conjunto H de historias</td>
+<td>Cada historia tiene un ID estable que nunca se reutiliza.</td>
+</tr>
+<tr>
+<td>Subsistemas</td>
+<td>Partición de H</td>
+<td>Cada historia tiene exactamente un subsistema dueño (principio 8).</td>
+</tr>
+<tr>
+<td>MVP y paquetes</td>
+<td>Subconjuntos de H</td>
+<td>Un paquete es una selección de historias, no un producto aparte.</td>
+</tr>
+<tr>
+<td>Depende de</td>
+<td>Orden parcial en H</td>
+<td>No puede tener ciclos. Su orden topológico es el orden de construcción.</td>
+</tr>
+<tr>
+<td>Usa</td>
+<td>Relación entre subsistemas</td>
+<td>Una historia usa algo que pertenece a otro subsistema, sin volverse suya.</td>
+</tr>
+<tr>
+<td>Trazabilidad</td>
+<td>Relación historia ↔ prueba</td>
+<td>Una historia aprobada sin prueba es una historia que nadie verifica.</td>
+</tr>
+<tr>
+<td>Etiquetas</td>
+<td>Cubierta de H</td>
+<td>Vistas libres como «día del examen». Una historia puede tener varias.</td>
+</tr>
+</tbody>
+</table>
+<p>Los pilares transversales (accesibilidad, privacidad, conectividad) no son dueños de historias. Aparecen como criterios de aceptación dentro de cada una.</p>
+<h2 id="formato-de-una-historia">Formato de una historia<a class="headerlink" href="#formato-de-una-historia" title="Permanent link">&para;</a></h2>
+<p>Cada historia lleva estos campos. Los que forman relaciones apuntan a otros IDs y nunca copian su texto.</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Qué contiene</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Prefijo y número estable</td>
+<td>ESC-41</td>
+</tr>
+<tr>
+<td>Historia</td>
+<td>Como [rol], quiero [acción], para [beneficio]</td>
+<td>Como dirección, quiero una lista diaria de retardos por grupo, para hablar a tiempo con el alumno o su familia</td>
+</tr>
+<tr>
+<td>Criterios</td>
+<td>Condiciones verificables</td>
+<td>Se calcula con la hora del escaneo contra la primera clase del grupo ese día</td>
+</tr>
+<tr>
+<td>Subsistema</td>
+<td>Exactamente uno, el dueño</td>
+<td>Identidad y acceso</td>
+</tr>
+<tr>
+<td>Estado</td>
+<td>propuesta, aprobada o implementada</td>
+<td>propuesta</td>
+</tr>
+<tr>
+<td>Depende de</td>
+<td>IDs que deben existir antes (orden parcial)</td>
+<td>ESC-29</td>
+</tr>
+<tr>
+<td>Usa</td>
+<td>Algo de otro subsistema que se consume sin ser dueño</td>
+<td>Horarios de grupo (control escolar)</td>
+</tr>
+<tr>
+<td>Pruebas</td>
+<td>IDs de pruebas de conformidad</td>
+<td>C-12</td>
+</tr>
+<tr>
+<td>Origen</td>
+<td>De dónde salió</td>
+<td>Nueva, diseño del MVP</td>
+</tr>
+<tr>
+<td>Etiquetas</td>
+<td>Vistas libres, opcional</td>
+<td>MVP, día del examen</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reglas del campo «depende de»:</strong></p>
+<ul>
+<li>Solo apunta a historias del catálogo. Si la dependencia es de otro subsistema todavía no migrado, va en «usa» hasta que tenga ID.</li>
+<li>Se anota la dependencia directa, no las heredadas. Si ESC-29 depende de ESC-45 y ESC-45 de ESC-44, ESC-29 no repite ESC-44.</li>
+<li>Una historia del MVP solo puede depender de historias del MVP. Si no, el MVP no se puede construir completo.</li>
+<li>Antes de aprobar una historia se revisa que no forme un ciclo.</li>
+</ul>
+<p>En los archivos, los campos que lee la herramienta van en el encabezado YAML (<code>id</code>, <code>titulo</code>, <code>subsistema</code>, <code>estado</code>, <code>depende_de</code>). Los demás van en el cuerpo. El estado puede ser <code>propuesta</code>, <code>aprobada</code>, <code>implementada</code> o <code>retirada</code>; un ID retirado no se reutiliza.</p>
+<h2 id="subsistemas">Subsistemas<a class="headerlink" href="#subsistemas" title="Permanent link">&para;</a></h2>
+<p>Los 11 subsistemas salen de agrupar las 80 historias de Sistema educativo. La migración va de uno en uno, empezando por la base.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Subsistema</th>
+<th>Historias de origen</th>
+<th>Migración</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Identidad y acceso a la plataforma (la base)</td>
+<td>ESC-19, 21, 38, 44 a 46, 61, 63; UNI-14</td>
+<td><strong>Migrado (9 historias)</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Acceso al plantel</td>
+<td>ESC-29, 39 a 43, 47, 48</td>
+<td><strong>Migrado (8 historias)</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Admisión</td>
+<td>ESC-01, 22 a 28, 30 a 32, 35 a 37</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Control escolar e inscripción</td>
+<td>ESC-02 a 04, 20, 24; UNI-01, 17, 18</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Constancias y verificación</td>
+<td>ESC-05 a 08, 54, 62; UNI-05, 09, 10; DOC-15</td>
+<td><strong>Migrado (9 historias; UNI-09 fusionada en ESC-05)</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Trayectoria académica</td>
+<td>ESC-09 a 11; UNI-02, 12, 21, 22, 25 a 27</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Comunicación con familias</td>
+<td>ESC-12 a 14</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Pagos y becas</td>
+<td>ESC-15, 16, 26</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Trámites largos y titulación</td>
+<td>UNI-03, 04, 06 a 08</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Personal docente</td>
+<td>DOC-01 a 16; ESC-17; UNI-11, 13</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Gobierno institucional</td>
+<td>ESC-18, 59; UNI-16, 20, 23, 24</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Integraciones</td>
+<td>UNI-15</td>
+<td>Pendiente</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Vinculación (servicio social, prácticas, bolsa de trabajo)</td>
+<td>Ninguna todavía</td>
+<td><strong>Propuesto</strong></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Comunicación entre escuelas</td>
+<td>ESC-49 a 53, 55 a 58, 60</td>
+<td><strong>Propuesto, con historias</strong></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Emergencias y evacuación</td>
+<td>Ninguna todavía; usaría los hechos de entrada</td>
+<td><strong>Propuesto</strong></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Bienestar y permanencia</td>
+<td>Ninguna todavía; usaría los retardos como señal</td>
+<td><strong>Propuesto</strong></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Estadística para la autoridad (formato 911)</td>
+<td>Ninguna todavía</td>
+<td><strong>Propuesto</strong></td>
+</tr>
+<tr>
+<td>18</td>
+<td>Espacios y equipo</td>
+<td>Ninguna todavía</td>
+<td><strong>Propuesto</strong></td>
+</tr>
+<tr>
+<td>19</td>
+<td>Salud escolar básica</td>
+<td>Ninguna todavía</td>
+<td><strong>Propuesto</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ajustes al aplicar la partición:</strong> ESC-35 (registro en campus el día del examen) y ESC-36 (tablero del examen) estaban agrupadas con acceso, pero su dueño es Admisión, porque existen por el examen. Pasaron a Admisión con la relación «usa ESC-29». Después, la trazabilidad agregó ESC-48. Por último, el antiguo «Identidad y acceso» se separó en dos: <strong>Identidad y acceso a la plataforma</strong>, la base que usan todos los subsistemas, y <strong>Acceso al plantel</strong>, que es opcional. Una escuela puede adoptar el primero sin el segundo, pero no al revés.</p>
+<h2 id="mvp-de-constancias-plan-de-construccion">MVP de constancias: plan de construcción<a class="headerlink" href="#mvp-de-constancias-plan-de-construccion" title="Permanent link">&para;</a></h2>
+<p>Es el MVP elegido (2026-11-12). Su especificación es <a href="../especificaciones/ESP-CON/">ESP-CON</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Adopción</th>
+<th>Construcción</th>
+<th>ID</th>
+<th>Historia corta</th>
+<th>Subsistema</th>
+<th>Depende de</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0</td>
+<td><a href="ESC-44/">ESC-44</a></td>
+<td>Importar el padrón</td>
+<td>Plataforma</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td><a href="ESC-19/">ESC-19</a></td>
+<td>Acceso por rol (mínima)</td>
+<td>Plataforma</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td><a href="ESC-63/">ESC-63</a></td>
+<td>Llaves de firma de la escuela</td>
+<td>Plataforma</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td><a href="ESC-61/">ESC-61</a></td>
+<td>Identificarse con un código</td>
+<td>Plataforma</td>
+<td><a href="ESC-44/">ESC-44</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td><a href="ESC-08/">ESC-08</a></td>
+<td>Plantillas oficiales con vigencia</td>
+<td>Constancias</td>
+<td><a href="ESC-19/">ESC-19</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td><a href="ESC-05/">ESC-05</a></td>
+<td>Constancia de estudios en autoservicio</td>
+<td>Constancias</td>
+<td><a href="ESC-08/">ESC-08</a>, <a href="ESC-61/">ESC-61</a>, <a href="ESC-63/">ESC-63</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td><a href="ESC-07/">ESC-07</a></td>
+<td>Verificar una constancia por QR</td>
+<td>Constancias</td>
+<td><a href="ESC-05/">ESC-05</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td><a href="ESC-62/">ESC-62</a></td>
+<td>Anular una constancia</td>
+<td>Constancias</td>
+<td><a href="ESC-07/">ESC-07</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="mvp-de-puerta-plan-de-construccion">MVP de puerta: plan de construcción<a class="headerlink" href="#mvp-de-puerta-plan-de-construccion" title="Permanent link">&para;</a></h2>
+<p>Va después del de constancias. Su especificación es <a href="../especificaciones/ESP-PLA/">ESP-PLA</a>.</p>
+<p>Las 14 historias del MVP de puerta pertenecen a dos subsistemas: <strong>Identidad y acceso a la plataforma</strong> y <strong>Acceso al plantel</strong>. Todas están en estado propuesta y todas tienen al menos una prueba de conformidad. Las fichas completas están en la sección de cada subsistema, más abajo.</p>
+<p>La tabla se lee de arriba abajo como un plan. La columna <strong>Adopción</strong> dice qué nivel del criterio de adopción completa cada historia. La columna <strong>Construcción</strong> dice en qué nivel del diagrama de la sección Relaciones está: 0 no depende de nada, 1 depende solo de historias de nivel 0, y así sucesivamente. Las historias con el mismo número de construcción se pueden hacer en cualquier orden o al mismo tiempo.</p>
+<table>
+<thead>
+<tr>
+<th>Adopción</th>
+<th>Construcción</th>
+<th>ID</th>
+<th>Historia corta</th>
+<th>Subsistema</th>
+<th>Depende de</th>
+<th>Pruebas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0</td>
+<td><a href="ESC-44/">ESC-44</a></td>
+<td>Importar el padrón</td>
+<td>Plataforma</td>
+<td>—</td>
+<td>C-18</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td><a href="ESC-43/">ESC-43</a></td>
+<td>Habilitar o deshabilitar un punto de acceso</td>
+<td>Plantel</td>
+<td>—</td>
+<td>C-15, C-16</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td><a href="ESC-19/">ESC-19</a></td>
+<td>Acceso por rol a información sensible (mínima)</td>
+<td>Plataforma</td>
+<td>—</td>
+<td>C-19</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td><a href="ESC-63/">ESC-63</a></td>
+<td>Llaves de firma de la escuela</td>
+<td>Plataforma</td>
+<td>—</td>
+<td>C-03</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td><a href="ESC-45/">ESC-45</a></td>
+<td>Emitir la credencial</td>
+<td>Plataforma</td>
+<td><a href="ESC-44/">ESC-44</a>, <a href="ESC-63/">ESC-63</a></td>
+<td>C-24</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td><a href="ESC-47/">ESC-47</a></td>
+<td>Registrar o dar de baja un teléfono de puerta</td>
+<td>Plantel</td>
+<td><a href="ESC-43/">ESC-43</a></td>
+<td>C-25</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td><a href="ESC-38/">ESC-38</a></td>
+<td>Mostrar mi credencial en el teléfono</td>
+<td>Plataforma</td>
+<td><a href="ESC-45/">ESC-45</a></td>
+<td>C-20</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td><a href="ESC-46/">ESC-46</a></td>
+<td>Revocar una credencial</td>
+<td>Plataforma</td>
+<td><a href="ESC-45/">ESC-45</a></td>
+<td>C-07</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td><a href="ESC-29/">ESC-29</a></td>
+<td>Validar la credencial con el teléfono</td>
+<td>Plantel</td>
+<td><a href="ESC-45/">ESC-45</a>, <a href="ESC-47/">ESC-47</a></td>
+<td>C-01 a C-11, C-13, C-14</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td><a href="ESC-39/">ESC-39</a></td>
+<td>Entrada manual sin QR</td>
+<td>Plantel</td>
+<td><a href="ESC-47/">ESC-47</a></td>
+<td>C-21</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td><a href="ESC-42/">ESC-42</a></td>
+<td>Registrar a un visitante</td>
+<td>Plantel</td>
+<td><a href="ESC-47/">ESC-47</a></td>
+<td>C-23</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td><a href="ESC-40/">ESC-40</a></td>
+<td>Tablero de entradas del día</td>
+<td>Plantel</td>
+<td><a href="ESC-29/">ESC-29</a>, <a href="ESC-39/">ESC-39</a>, <a href="ESC-19/">ESC-19</a></td>
+<td>C-22</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td><a href="ESC-41/">ESC-41</a></td>
+<td>Retardos diarios por grupo</td>
+<td>Plantel</td>
+<td><a href="ESC-29/">ESC-29</a></td>
+<td>C-12</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td><a href="ESC-48/">ESC-48</a></td>
+<td>Exportar todos los registros</td>
+<td>Plantel</td>
+<td><a href="ESC-29/">ESC-29</a>, <a href="ESC-19/">ESC-19</a></td>
+<td>C-17</td>
+</tr>
+<tr>
+<td>Sin nivel</td>
+<td>—</td>
+<td><a href="ESC-21/">ESC-21</a></td>
+<td>Acceso del tutor sin contraseña</td>
+<td>Plataforma</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Sin nivel</td>
+<td>—</td>
+<td><a href="UNI-14/">UNI-14</a></td>
+<td>Inicio de sesión único</td>
+<td>Plataforma</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>El nivel 2 de cada subsistema es el mínimo para declararlo adoptado; el MVP de la demo cubre los niveles 2 y 3 de ambos. «Sin nivel» son historias que todavía no entran en ningún criterio de adopción. Los IDs no cambian aunque cambie el orden o el subsistema: el orden es una vista, el ID es la identidad.</p>
+<h2 id="dos-mvp-posibles">Dos MVP posibles<a class="headerlink" href="#dos-mvp-posibles" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MVP de puerta</th>
+<th>MVP de constancias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Historias</td>
+<td>14</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Base compartida</td>
+<td>ESC-44, ESC-19, ESC-63</td>
+<td>ESC-44, ESC-19, ESC-63</td>
+</tr>
+<tr>
+<td>Además de la base</td>
+<td>Credencial (ESC-45, 46, 38) y las 8 de Acceso al plantel</td>
+<td>Inicio de sesión (ESC-61) y 4 de Constancias</td>
+</tr>
+<tr>
+<td>Equipo</td>
+<td>Un teléfono en cada puerta</td>
+<td>Ninguno; el alumno usa su teléfono o una computadora</td>
+</tr>
+<tr>
+<td>Carga</td>
+<td>Hora pico de entrada, a veces sin red</td>
+<td>Baja y repartida en el día</td>
+</tr>
+<tr>
+<td>Quién ve el beneficio primero</td>
+<td>Dirección y familias</td>
+<td>Control escolar y alumnos</td>
+</tr>
+<tr>
+<td>Riesgo principal</td>
+<td>La operación diaria en la puerta</td>
+<td>Bajo: la constancia sigue firmada a mano, y quitar esa firma es horizonte</td>
+</tr>
+<tr>
+<td>Especificación</td>
+<td>ESP-IDP y ESP-PLA, v0.1 escrita</td>
+<td>ESP-IDP y ESP-CON, por escribir</td>
+</tr>
+</tbody>
+</table>
+<p>Lo que se construya primero no se tira, porque la base es la misma. Si se empieza por constancias, después el MVP de puerta solo agrega 11 historias (ESC-45, 46, 38 y las 8 de Acceso al plantel). Si se empieza por la puerta, después el de constancias agrega 5 (ESC-61 y las 4 de Constancias).</p>
+<h2 id="identidad-y-acceso-a-la-plataforma">Identidad y acceso a la plataforma<a class="headerlink" href="#identidad-y-acceso-a-la-plataforma" title="Permanent link">&para;</a></h2>
+<p>Es la base: quién es cada persona, cómo lo demuestra y qué puede hacer dentro del sistema. Todos los demás subsistemas la usan. Incluye la credencial, porque no sirve solo para la puerta: es la misma que podría verificar un tercero, como ADO o una universidad. Tiene 9 historias: 6 en el MVP de puerta y 4 en el de constancias (ESC-44, 19, 63 están en ambos).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Historia corta</th>
+<th>Depende de</th>
+<th>Pruebas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ESC-19/">ESC-19</a></td>
+<td>Acceso por rol a información sensible</td>
+<td>—</td>
+<td>C-19</td>
+</tr>
+<tr>
+<td><a href="ESC-21/">ESC-21</a></td>
+<td>Acceso del tutor sin contraseña</td>
+<td><a href="ESC-61/">ESC-61</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-38/">ESC-38</a></td>
+<td>Mostrar mi credencial en el teléfono</td>
+<td><a href="ESC-45/">ESC-45</a></td>
+<td>C-20</td>
+</tr>
+<tr>
+<td><a href="ESC-44/">ESC-44</a></td>
+<td>Importar el padrón</td>
+<td>—</td>
+<td>C-18</td>
+</tr>
+<tr>
+<td><a href="ESC-45/">ESC-45</a></td>
+<td>Emitir la credencial</td>
+<td><a href="ESC-44/">ESC-44</a>, <a href="ESC-63/">ESC-63</a></td>
+<td>C-24</td>
+</tr>
+<tr>
+<td><a href="ESC-46/">ESC-46</a></td>
+<td>Revocar una credencial</td>
+<td><a href="ESC-45/">ESC-45</a></td>
+<td>C-07</td>
+</tr>
+<tr>
+<td><a href="UNI-14/">UNI-14</a></td>
+<td>Inicio de sesión único</td>
+<td><a href="ESC-61/">ESC-61</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-61/">ESC-61</a></td>
+<td>Identificarse con un código, sin contraseña</td>
+<td><a href="ESC-44/">ESC-44</a></td>
+<td>C-26 a C-30, C-48 a C-50</td>
+</tr>
+<tr>
+<td><a href="ESC-63/">ESC-63</a></td>
+<td>Llaves de firma de la escuela</td>
+<td>—</td>
+<td>C-03, C-47</td>
+</tr>
+</tbody>
+</table>
+<h2 id="acceso-al-plantel">Acceso al plantel<a class="headerlink" href="#acceso-al-plantel" title="Permanent link">&para;</a></h2>
+<p>Registra quién entra al plantel, por dónde y a qué hora. Es opcional: una escuela puede usar el resto del sistema sin él. Usa la credencial y los roles de Identidad y acceso a la plataforma. Tiene 8 historias, todas en el MVP.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Historia corta</th>
+<th>Depende de</th>
+<th>Pruebas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ESC-29/">ESC-29</a></td>
+<td>Validar la credencial con el teléfono</td>
+<td><a href="ESC-45/">ESC-45</a>, <a href="ESC-47/">ESC-47</a></td>
+<td>C-01 a C-11, C-13, C-14</td>
+</tr>
+<tr>
+<td><a href="ESC-39/">ESC-39</a></td>
+<td>Entrada manual sin QR</td>
+<td><a href="ESC-47/">ESC-47</a></td>
+<td>C-21</td>
+</tr>
+<tr>
+<td><a href="ESC-40/">ESC-40</a></td>
+<td>Tablero de entradas del día</td>
+<td><a href="ESC-29/">ESC-29</a>, <a href="ESC-39/">ESC-39</a>, <a href="ESC-19/">ESC-19</a></td>
+<td>C-22</td>
+</tr>
+<tr>
+<td><a href="ESC-41/">ESC-41</a></td>
+<td>Retardos diarios por grupo</td>
+<td><a href="ESC-29/">ESC-29</a></td>
+<td>C-12</td>
+</tr>
+<tr>
+<td><a href="ESC-42/">ESC-42</a></td>
+<td>Registrar a un visitante</td>
+<td><a href="ESC-47/">ESC-47</a></td>
+<td>C-23</td>
+</tr>
+<tr>
+<td><a href="ESC-43/">ESC-43</a></td>
+<td>Habilitar o deshabilitar un punto de acceso</td>
+<td>—</td>
+<td>C-15, C-16</td>
+</tr>
+<tr>
+<td><a href="ESC-47/">ESC-47</a></td>
+<td>Registrar o dar de baja un teléfono de puerta</td>
+<td><a href="ESC-43/">ESC-43</a></td>
+<td>C-25</td>
+</tr>
+<tr>
+<td><a href="ESC-48/">ESC-48</a></td>
+<td>Exportar todos los registros</td>
+<td><a href="ESC-29/">ESC-29</a>, <a href="ESC-19/">ESC-19</a></td>
+<td>C-17</td>
+</tr>
+</tbody>
+</table>
+<h2 id="constancias-y-verificacion">Constancias y verificación<a class="headerlink" href="#constancias-y-verificacion" title="Permanent link">&para;</a></h2>
+<p>Emite documentos que la escuela firma y que cualquiera puede comprobar: constancias de estudios, laborales y de no adeudo. Usa el padrón, los roles, el inicio de sesión y las llaves de firma de Identidad y acceso a la plataforma. No necesita teléfonos en la puerta ni aguantar una hora pico. Tiene 9 historias, 4 de ellas en el MVP de constancias. UNI-09 (constancias en autoservicio para universidad) era la misma historia que ESC-05 y quedó fusionada en ella; su ID no se reutiliza.</p>
+<p><strong>Adopción gradual.</strong> En el nivel 2 la constancia sale del sistema con folio y QR, pero se sigue firmando a mano, así que nada cambia para quien la recibe. En el nivel 3 cualquiera la verifica con el QR y la escuela puede anularla. Desde ahí la firma electrónica puede reemplazar a la autógrafa, solo donde el receptor la acepte (supuesto por confirmar).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Historia corta</th>
+<th>Depende de</th>
+<th>Pruebas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ESC-08/">ESC-08</a></td>
+<td>Plantillas oficiales con vigencia</td>
+<td><a href="ESC-19/">ESC-19</a></td>
+<td>C-31 a C-33</td>
+</tr>
+<tr>
+<td><a href="ESC-05/">ESC-05</a></td>
+<td>Constancia de estudios en autoservicio</td>
+<td><a href="ESC-08/">ESC-08</a>, <a href="ESC-61/">ESC-61</a>, <a href="ESC-63/">ESC-63</a></td>
+<td>C-34 a C-37, C-45</td>
+</tr>
+<tr>
+<td><a href="ESC-07/">ESC-07</a></td>
+<td>Verificar una constancia por QR</td>
+<td><a href="ESC-05/">ESC-05</a></td>
+<td>C-38 a C-42, C-46, C-47</td>
+</tr>
+<tr>
+<td><a href="ESC-62/">ESC-62</a></td>
+<td>Anular una constancia</td>
+<td><a href="ESC-07/">ESC-07</a></td>
+<td>C-43, C-44</td>
+</tr>
+<tr>
+<td><a href="ESC-06/">ESC-06</a></td>
+<td>Bandeja de revisión para constancias especiales</td>
+<td><a href="ESC-05/">ESC-05</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-54/">ESC-54</a></td>
+<td>Autenticidad de un documento de otra escuela</td>
+<td><a href="ESC-07/">ESC-07</a>, <a href="ESC-53/">ESC-53</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="UNI-05/">UNI-05</a></td>
+<td>Constancia de no adeudo automática</td>
+<td><a href="ESC-05/">ESC-05</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="UNI-10/">UNI-10</a></td>
+<td>Verificación de certificados y grados</td>
+<td><a href="ESC-07/">ESC-07</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="DOC-15/">DOC-15</a></td>
+<td>Constancias laborales en autoservicio</td>
+<td><a href="ESC-05/">ESC-05</a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="comunicacion-entre-escuelas-propuesto">Comunicación entre escuelas (propuesto)<a class="headerlink" href="#comunicacion-entre-escuelas-propuesto" title="Permanent link">&para;</a></h2>
+<p>Subsistema propuesto el 2026-11-11, sin especificación todavía. <strong>Es dueño del intercambio, no de los datos:</strong> el expediente pertenece a Control escolar y la verificación de documentos a Constancias y verificación. Este subsistema solo se encarga de que viajen entre escuelas de forma segura. Como todos, se apoya en la versión mínima de Identidad y acceso a la plataforma.</p>
+<p><strong>Criterios comunes a todas sus historias:</strong> consentimiento explícito del alumno o tutor cuando hay datos personales, solo los datos necesarios, y registro de quién envió qué, a quién y cuándo.</p>
+<p>Todas están en estado <strong>propuesta</strong>. Las historias ESC-49, 50, 51 y 53 juntas forman el traslado de expediente completo y son el primer paquete candidato.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Historia corta</th>
+<th>Depende de</th>
+<th>Pruebas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ESC-53/">ESC-53</a></td>
+<td>Registrar mi escuela en un directorio común con su llave pública</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-49/">ESC-49</a></td>
+<td>Solicitar el expediente de un alumno que viene de otra escuela</td>
+<td><a href="ESC-53/">ESC-53</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-50/">ESC-50</a></td>
+<td>Autorizar o negar el envío de mi expediente a otra escuela</td>
+<td><a href="ESC-49/">ESC-49</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-51/">ESC-51</a></td>
+<td>Atender una solicitud de expediente desde el sistema</td>
+<td><a href="ESC-49/">ESC-49</a>, <a href="ESC-50/">ESC-50</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-52/">ESC-52</a></td>
+<td>Enviar mi certificado a la universidad o la empresa que me lo pide</td>
+<td><a href="ESC-53/">ESC-53</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-55/">ESC-55</a></td>
+<td>Consultar una tabla compartida de equivalencias entre planes de estudio</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-56/">ESC-56</a></td>
+<td>Cursar una actividad o materia en otra escuela de la red y que el resultado regrese a mi expediente</td>
+<td><a href="ESC-53/">ESC-53</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-57/">ESC-57</a></td>
+<td>Compartir materiales con docentes de otras escuelas</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-58/">ESC-58</a></td>
+<td>Ver indicadores agregados de varias escuelas sin datos personales</td>
+<td><a href="ESC-53/">ESC-53</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="ESC-60/">ESC-60</a></td>
+<td>Anunciar eventos y concursos interescolares</td>
+<td><a href="ESC-53/">ESC-53</a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gobierno-institucional-por-migrar">Gobierno institucional (por migrar)<a class="headerlink" href="#gobierno-institucional-por-migrar" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Historia corta</th>
+<th>Depende de</th>
+<th>Pruebas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ESC-59/">ESC-59</a></td>
+<td>Publicar y votar propuestas de cambio a las especificaciones</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>ESC-59 nació en Comunicación entre escuelas, pero su dueño es Gobierno institucional.</p>
+<h2 id="orden-de-construccion-del-mvp-de-puerta">Orden de construcción del MVP de puerta<a class="headerlink" href="#orden-de-construccion-del-mvp-de-puerta" title="Permanent link">&para;</a></h2>
+<p><strong>Orden topológico de construcción del MVP.</strong> Dentro de un nivel el orden es libre; un nivel empieza cuando el anterior está listo.</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Historias</th>
+<th>Qué se tiene al terminar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>ESC-44, ESC-63, ESC-43, ESC-19</td>
+<td>Padrón cargado, llaves de firma, puntos de acceso y roles</td>
+</tr>
+<tr>
+<td>1</td>
+<td>ESC-45, ESC-47</td>
+<td>Credenciales emitidas y teléfonos de puerta autorizados</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ESC-38, ESC-46, ESC-29, ESC-39, ESC-42</td>
+<td>Entradas registradas en la puerta: QR, manual y visitantes</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ESC-40, ESC-41, ESC-48</td>
+<td>Tablero del día, retardos y exportación</td>
+</tr>
+</tbody>
+</table>
+<p>ESC-41 tiene una dependencia fuera del subsistema: los horarios de grupo. Para el MVP vienen del archivo de horarios de la institución sintética, y tendrán ID propio cuando se migre Control escolar e inscripción. ESC-21 y UNI-14 no aparecen porque están fuera del MVP y no dependen de nada del MVP.</p>
+<h2 id="trazabilidad">Trazabilidad<a class="headerlink" href="#trazabilidad" title="Permanent link">&para;</a></h2>
+<p>Cada historia lista sus pruebas de conformidad en su propio archivo, y cada prueba de una especificación cita su historia. Las tablas por subsistema de esta página resumen esa relación.</p>
+<h2 id="pendientes-de-migracion">Pendientes de migración<a class="headerlink" href="#pendientes-de-migracion" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] Aprobar las 14 historias del MVP de puerta (pasar de propuesta a aprobada).</li>
+<li>[ ] Confirmar el rol de origen de UNI-14 en Sistema educativo.</li>
+<li>[ ] En el documento de diseño del MVP, dejar solo la lista de IDs con enlace a este catálogo.</li>
+<li>[ ] En Sistema educativo, agregar una nota que apunte a este catálogo como fuente vigente.</li>
+<li>[ ] Migrar Admisión (incluye ESC-35 y 36), luego Control escolar e inscripción, que trae los horarios de grupo.</li>
+<li>[ ] Al migrar cada subsistema: agregar «para» y criterios, y revisar que no aparezcan ciclos en «depende de».</li>
+<li>[ ] Retirar del catálogo lo que no aplica a escuela pública, como ESC-15 (colegiaturas), marcándolo como descartado sin borrar su ID.</li>
+<li>[x] Elegir entre el MVP de puerta y el de constancias: se eligió constancias (2026-11-12).</li>
+<li>[ ] Horizonte, no bloquea el MVP: confirmar con receptores (becas, empresas, otras escuelas) si aceptan una constancia sin firma autógrafa, solo con firma electrónica y QR.</li>
+<li>[ ] Antes del piloto, no del desarrollo (la institución sintética ya los trae): revisar que el padrón real (ESC-44) traiga los datos de la constancia: semestre, grupo, turno, ciclo y un contacto (correo o teléfono).</li>
+<li>[ ] Si se elige constancias: escribir ESP-CON con sus pruebas de conformidad y agregar ESC-61 y ESC-63 a ESP-IDP.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.action.edit"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2255 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://Sierra-034.github.io/especificaciones-escolares/especificaciones/ESP-CON/">
+      
+      
+        <link rel="prev" href="../ESP-IDP/">
+      
+      
+        <link rel="next" href="../ESP-PLA/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>ESP-CON Constancias - Especificaciones escolares</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#esp-con-constancias-y-verificacion-v03" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Especificaciones escolares" class="md-header__button md-logo" aria-label="Especificaciones escolares" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Especificaciones escolares
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ESP-CON Constancias
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Sierra-034/especificaciones-escolares" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Especificaciones escolares" class="md-nav__button md-logo" aria-label="Especificaciones escolares" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Especificaciones escolares
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Sierra-034/especificaciones-escolares" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../principios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../historias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Historias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Especificaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Especificaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ESP-IDP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-IDP Identidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-CON Constancias
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-CON Constancias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alcance-y-convenciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alcance y convenciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo de datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-constancia-firmada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La constancia firmada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La constancia firmada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-de-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta de verificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-de-sesion-con-codigo-esc-61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicio de sesión con código (ESC-61)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pruebas-de-conformidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pruebas de conformidad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pruebas de conformidad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectores-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vectores de prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criterio-de-adopcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criterio de adopción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuera-de-v03-y-preguntas-abiertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fuera de v0.3 y preguntas abiertas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fuera de v0.3 y preguntas abiertas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-incluido-en-esta-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No incluido en esta versión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pendientes-conocidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pendientes conocidos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supuestos-del-padron" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supuestos del padrón
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-abiertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preguntas abiertas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ESP-PLA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-PLA Acceso al plantel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pendientes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendientes conocidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisiones (ADR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proceso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proceso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proceso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proceso/0-preparar-equipo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0 · Preparar tu equipo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proceso/A-proponer-cambio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A · Proponer un cambio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proceso/B-publicar-version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B · Publicar una versión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proceso/C-fijar-version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C · Fijar la versión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proceso/D-corregir-version/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D · Corregir una versión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrospectivas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Retrospectivas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../retrospectivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../retrospectivas/2026-11-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-11-13 · Arranque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alcance-y-convenciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alcance y convenciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo de datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-constancia-firmada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La constancia firmada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La constancia firmada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-de-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta de verificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-de-sesion-con-codigo-esc-61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicio de sesión con código (ESC-61)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pruebas-de-conformidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pruebas de conformidad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pruebas de conformidad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectores-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vectores de prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criterio-de-adopcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criterio de adopción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuera-de-v03-y-preguntas-abiertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fuera de v0.3 y preguntas abiertas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fuera de v0.3 y preguntas abiertas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-incluido-en-esta-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No incluido en esta versión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pendientes-conocidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pendientes conocidos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supuestos-del-padron" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supuestos del padrón
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-abiertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preguntas abiertas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/Sierra-034/especificaciones-escolares/edit/main/docs/especificaciones/ESP-CON.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="esp-con-constancias-y-verificacion-v03">ESP-CON · Constancias y verificación (v0.3)<a class="headerlink" href="#esp-con-constancias-y-verificacion-v03" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Migrado el 2026-11-13 desde <a href="https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv">Especificación v0.2: constancias y verificación (ESP-CON)</a> (fecha del original: 2026-11-12). Texto copiado sin cambios; la fuente de verdad desde ahora es este archivo.</p>
+</blockquote>
+<p><strong>Versión 0.3 (2026-11-13).</strong> Corrige las incongruencias de la <a href="https://claude.ai/artifact/Q3p2bdLkLhM34DU9qTHkkL">revisión para el contrato OpenAPI</a>: el alumno pide su código con la matrícula; <code>GET /v0/verificar/{folio}</code> responde con <code>resultado</code>; los roles y el token de sesión salen del catálogo único de ESP-IDP (ADR-0012); rotar, retirar y revocar una llave son tres cosas distintas (ADR-0011); el JWKS vive en <code>GET /v0/llaves</code> (ADR-0010). Aclara versiones de plantilla, permisos de lectura, límites, anulación repetida y activación presencial. Agrega C-51 a C-57. Lo que se dejó fuera está en <a href="../pendientes/">Pendientes conocidos</a>.</p>
+<p><strong>Versión 0.2 (2026-11-12).</strong> Aplica <a href="https://claude.ai/artifact/BFv1HemHiY2yqZoTx7jqoc">ADR-008 y ADR-009</a>, aceptados por Samuel: QR con URL y folio, PDF/A-2b con la JWS adjunta, datos visibles al verificar, y código de 6 dígitos por el puerto Notificador. Corrige C-35, C-42, C-43 y el paso 1 de la validación. Agrega C-45 a C-50.</p>
+<h2 id="alcance-y-convenciones">Alcance y convenciones<a class="headerlink" href="#alcance-y-convenciones" title="Permanent link">&para;</a></h2>
+<p>ESP-CON v0.3 cubre el subsistema <strong>Constancias y verificación</strong>: emitir constancias de estudios en autoservicio, verificarlas por QR e invalidarlas. Requiere que el subsistema <strong>Identidad y acceso a la plataforma</strong> (ESP-IDP) esté en nivel 2: padrón importado (ESC-44), roles mínimos (ESC-19), llaves de firma (ESC-63) e identificación sin contraseña (ESC-61).</p>
+<p><strong>Palabras normativas</strong> (con el sentido de RFC 2119): <strong>DEBE</strong> es obligatorio. <strong>DEBERÍA</strong> es recomendado. <strong>PUEDE</strong> es opcional.</p>
+<p><strong>Convenciones</strong></p>
+<ul>
+<li>Los IDs de alumno (<code>sub</code>) son opacos: no incluyen nombre, CURP ni matrícula directamente.</li>
+<li>Los folios de constancia son globalmente únicos (UUIDv4 o equivalente) y opacos.</li>
+<li>Las fechas y horas van en UTC, formato ISO 8601 (<code>2026-11-12T03:00:00Z</code>).</li>
+<li>Los textos se normalizan a NFC (Unicode). Dos cadenas se comparan en NFC.</li>
+<li>El dominio <code>especificacion.example</code> es provisional; se reemplaza en la implementación.</li>
+<li>Los <strong>roles</strong> y el contenido del <strong>token de sesión</strong> se definen en el <a href="../ESP-IDP/#catalogo-de-roles">catálogo de roles de ESP-IDP</a>. ESP-CON usa <code>alumno</code> y <code>control_escolar</code>.</li>
+<li>El alumno se identifica ante la API con su <strong>matrícula</strong>, que sí conoce. El <code>sub</code> es interno y el alumno nunca lo escribe.</li>
+<li>Las <strong>llaves de firma</strong> se describen en ESP-IDP (ESC-63). ESP-CON usa llaves con <code>kid</code> que empieza por <code>constancia-</code> para distinguirlas de las llaves de credencial (<code>credencial-</code>).</li>
+</ul>
+<h2 id="modelo-de-datos">Modelo de datos<a class="headerlink" href="#modelo-de-datos" title="Permanent link">&para;</a></h2>
+<p>Cinco entidades principales.</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Descripción</th>
+<th>Llave natural</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alumno</td>
+<td>Persona del padrón vigente. Viene de ESC-44.</td>
+<td><code>sub</code> (opaco)</td>
+</tr>
+<tr>
+<td>Plantilla</td>
+<td>Formato oficial de un tipo de constancia, con vigencia y versión.</td>
+<td><code>plantilla_id</code> + <code>version</code></td>
+</tr>
+<tr>
+<td>Constancia</td>
+<td>Documento firmado emitido para un alumno a partir de una plantilla.</td>
+<td><code>folio</code> (UUID, opaco)</td>
+</tr>
+<tr>
+<td>SolicitudRevision</td>
+<td>Solicitud cuya plantilla requiere aprobación de control escolar antes de emitirse. Fuera del MVP.</td>
+<td><code>solicitud_id</code></td>
+</tr>
+<tr>
+<td>AuditoriaEmision</td>
+<td>Registro inmutable de cada emisión: quién, cuándo, folio, versión de plantilla.</td>
+<td><code>folio</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reglas</strong></p>
+<ul>
+<li>Una constancia es inmutable una vez emitida; anularla la marca, no la borra.</li>
+<li>Una plantilla vencida (<code>vigencia_fin &lt; ahora</code>) no PUEDE usarse para nuevas emisiones.</li>
+<li>Cada emisión anota quién la pidió (<code>sub</code> del solicitante) y cuándo; las verificaciones externas se cuentan sin anotar quién consultó.</li>
+<li>Los datos de la constancia (nombre, CURP, matrícula, semestre, grupo, turno, ciclo) DEBEN venir del padrón; nunca se capturan manualmente.</li>
+</ul>
+<p><strong>Plantilla</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;constancia-estudios&quot;,
+  &quot;version&quot;: 1,
+  &quot;tipo&quot;: &quot;estudios&quot;,
+  &quot;nombre&quot;: &quot;Constancia de estudios&quot;,
+  &quot;vigencia_inicio&quot;: &quot;2026-08-01&quot;,
+  &quot;vigencia_fin&quot;: &quot;2027-07-31&quot;,
+  &quot;requiere_revision&quot;: false,
+  &quot;activa&quot;: true,
+  &quot;campos&quot;: [&quot;nombre&quot;, &quot;curp&quot;, &quot;matricula&quot;, &quot;semestre&quot;, &quot;grupo&quot;, &quot;turno&quot;, &quot;ciclo&quot;]
+}
+</code></pre>
+<p><strong>Versiones de plantilla</strong></p>
+<ul>
+<li><code>POST /v0/plantillas</code> crea una plantilla con un <code>id</code> nuevo, en su versión 1.</li>
+<li><code>PUT /v0/plantillas/{id}</code> crea la versión siguiente del mismo <code>id</code>. En la misma transacción, la versión anterior queda <code>activa: false</code>. Solo hay una versión activa por <code>id</code>.</li>
+<li>Una emisión nueva usa siempre la versión activa. Las constancias ya emitidas con una versión anterior siguen siendo válidas: su JWS dice con qué versión se emitieron.</li>
+<li><code>GET /v0/plantillas</code> lista solo las versiones activas y vigentes.</li>
+</ul>
+<h2 id="la-constancia-firmada">La constancia firmada<a class="headerlink" href="#la-constancia-firmada" title="Permanent link">&para;</a></h2>
+<p>Una constancia es un JWS (JSON Web Signature) con algoritmo EdDSA, igual que la credencial de ESP-IDP, pero con distinto <code>typ</code> y llave. El PDF que recibe el alumno es solo la presentación de la constancia (ADR-008). La anulación se guarda en el servidor, nunca en la JWS.</p>
+<p><strong>Encabezado JWS</strong></p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alg</code></td>
+<td><code>EdDSA</code></td>
+</tr>
+<tr>
+<td><code>kid</code></td>
+<td>id de la llave de firma, empieza por <code>constancia-</code></td>
+</tr>
+<tr>
+<td><code>typ</code></td>
+<td><code>constancia+jwt</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Contenido del payload</strong></p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jti</code></td>
+<td>string</td>
+<td>Folio (UUID, opaco). También el id de la constancia.</td>
+</tr>
+<tr>
+<td><code>iss</code></td>
+<td>string</td>
+<td>Id del plantel.</td>
+</tr>
+<tr>
+<td><code>iat</code></td>
+<td>number</td>
+<td>Momento de emisión (epoch UTC).</td>
+</tr>
+<tr>
+<td><code>exp</code></td>
+<td>number</td>
+<td>Vencimiento (fin del ciclo escolar, epoch UTC).</td>
+</tr>
+<tr>
+<td><code>typ</code></td>
+<td>string</td>
+<td>Tipo de constancia. En v0.3 solo existe <code>estudios</code>.</td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>string</td>
+<td>Id opaco del alumno.</td>
+</tr>
+<tr>
+<td><code>plantilla</code></td>
+<td>string</td>
+<td><code>{id}@{version}</code> de la plantilla usada.</td>
+</tr>
+<tr>
+<td><code>datos</code></td>
+<td>object</td>
+<td>Campos del alumno según la plantilla (nombre, CURP, matrícula, semestre, grupo, turno, ciclo).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Validación</strong></p>
+<p>El verificador (página pública, sin cuenta ni app) DEBE, en este orden:</p>
+<ol>
+<li>Pedir <code>GET /v0/verificar/{folio}</code> (el QR solo trae la URL). La respuesta trae la JWS, el <code>resultado</code> y los datos visibles (ver <a href="#respuesta-de-verificacion">Respuesta de verificación</a>). Decodificar la JWS y obtener el <code>kid</code>.</li>
+<li>Buscar la llave pública del plantel con ese <code>kid</code> en <code>GET /v0/llaves</code>. Si no está (por ejemplo, porque la llave fue revocada), el resultado es «firma inválida».</li>
+<li>Verificar la firma EdDSA.</li>
+<li>Comprobar que <code>exp &gt; ahora</code>.</li>
+<li>Comprobar que <code>resultado</code> no sea <code>anulada</code> (respuesta 410).</li>
+<li>Mostrar los datos visibles para que quien verifica los compare con el papel; DEBEN coincidir con <code>datos</code>.</li>
+</ol>
+<p>Cualquier fallo en los pasos 1–5 DEBE mostrar el resultado correspondiente (firma inválida, vencida, anulada) y nunca silenciarlo. La verificación por QR no pide cuenta ni instala app: el QR contiene la URL <code>https://{plantel}/verificar/{folio}</code> y el navegador la abre directamente.</p>
+<h3 id="respuesta-de-verificacion">Respuesta de verificación<a class="headerlink" href="#respuesta-de-verificacion" title="Permanent link">&para;</a></h3>
+<p>El servidor calcula <code>resultado</code> con lo que sabe: si el folio existe, si está anulado y si <code>exp</code> ya pasó. La firma la comprueba la página (pasos 2 y 3), que es la que muestra «firma inválida».</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>HTTP</th>
+<th>Cuerpo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vigente</td>
+<td>200</td>
+<td><code>resultado: "valida"</code>, <code>jws</code>, <code>datos_visibles</code></td>
+</tr>
+<tr>
+<td>Vencida (<code>exp</code> ya pasó)</td>
+<td>200</td>
+<td><code>resultado: "vencida"</code>, <code>jws</code>, <code>datos_visibles</code></td>
+</tr>
+<tr>
+<td>Anulada</td>
+<td>410</td>
+<td>Problem Details <code>constancia-anulada</code> con los miembros de extensión <code>resultado: "anulada"</code>, <code>jws</code>, <code>datos_visibles</code> y <code>anulada_en</code> (RFC 9457 permite miembros de extensión)</td>
+</tr>
+<tr>
+<td>No existe</td>
+<td>404</td>
+<td>Problem Details <code>folio-no-encontrado</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{
+  &quot;resultado&quot;: &quot;valida&quot;,
+  &quot;jws&quot;: &quot;eyJhbGciOiJFZERTQSIs...&quot;,
+  &quot;datos_visibles&quot;: {
+    &quot;nombre&quot;: &quot;Ana López Martínez&quot;,
+    &quot;plantel&quot;: &quot;Plantel de ejemplo&quot;,
+    &quot;semestre&quot;: 3,
+    &quot;grupo&quot;: &quot;A&quot;,
+    &quot;ciclo&quot;: &quot;2026-2027&quot;,
+    &quot;emitida_en&quot;: &quot;2026-11-12T16:00:00Z&quot;,
+    &quot;curp_enmascarada&quot;: &quot;LOMA******MX**&quot;
+  }
+}
+</code></pre>
+<p><strong>PDF (ADR-008)</strong></p>
+<ul>
+<li>Formato PDF/A-2b. Lleva los datos de la plantilla, el folio en texto legible, el QR, la leyenda «Verifique en {plantel}/verificar» y el espacio para la firma autógrafa.</li>
+<li>El QR lleva solo la URL <code>https://{plantel}/verificar/{folio}</code>, con corrección de errores nivel M y al menos 2.5 cm de lado.</li>
+<li>La JWS va incrustada como archivo adjunto <code>constancia.jws</code>, idéntica a la guardada en el servidor. Permite agregar después verificación sin red o firma electrónica del PDF sin cambiar el QR ni el folio.</li>
+</ul>
+<p><strong>Datos visibles al verificar (ADR-008)</strong></p>
+<p>La página pública muestra uno de cuatro resultados (válida, vencida, anulada, no encontrada) y, si existe, nombre completo, plantel, semestre, grupo, ciclo, fecha de emisión y CURP enmascarada (solo los 4 primeros caracteres y los 2 de la homoclave). NO DEBE mostrar la matrícula ni la CURP completa. El servidor DEBE limitar <code>GET /v0/verificar/{folio}</code> a 60 consultas por IP por minuto (configurable); al pasarse responde 429 <code>demasiadas-solicitudes</code>.</p>
+<p><strong>Rotar, retirar y revocar llaves (ADR-0011)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Acción</th>
+<th>Cuándo</th>
+<th>Qué pasa en <code>GET /v0/llaves</code></th>
+<th>Qué pasa con lo ya firmado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rotar</strong></td>
+<td>Cambio programado de llave</td>
+<td>La llave nueva firma lo nuevo. La anterior sigue publicada, solo para verificar.</td>
+<td>Sigue válido (C-47).</td>
+</tr>
+<tr>
+<td><strong>Retirar</strong></td>
+<td>Venció la última constancia que firmó una llave rotada</td>
+<td>La llave sale del JWKS.</td>
+<td>Nada: ya no queda nada vigente firmado con ella.</td>
+</tr>
+<tr>
+<td><strong>Revocar</strong></td>
+<td>La llave se perdió o la robaron</td>
+<td>La llave sale del JWKS en ese momento. Queda anotado quién y cuándo.</td>
+<td>Deja de verificar: la página muestra «firma inválida» (C-55). Control escolar DEBE reemitir lo que el alumno necesite.</td>
+</tr>
+</tbody>
+</table>
+<p>Todas las llaves del JWKS llevan <code>use: "sig"</code>. Cuál de ellas firma hoy lo sabe solo el servidor; el JWKS no lo dice.</p>
+<h2 id="inicio-de-sesion-con-codigo-esc-61">Inicio de sesión con código (ESC-61)<a class="headerlink" href="#inicio-de-sesion-con-codigo-esc-61" title="Permanent link">&para;</a></h2>
+<p>El sistema no guarda contraseñas. Para identificarse, el usuario recibe un código de un solo uso en el contacto que la escuela tiene registrado.</p>
+<p><strong>Flujo</strong></p>
+<ol>
+<li>El usuario pide un código: <code>POST /v0/auth/codigo</code> con su matrícula.</li>
+<li>El servidor genera un código de 6 dígitos, lo guarda como HMAC con una llave del servidor y lo envía al contacto registrado (correo o teléfono) a través del puerto <strong>Notificador</strong>.</li>
+<li>El usuario canjea el código: <code>POST /v0/auth/sesion</code> con su matrícula y el código.</li>
+<li>El servidor responde con un token de sesión (JWT firmado por el servidor) válido por el tiempo configurado. Su contenido lo define el <a href="../ESP-IDP/#token-de-sesion">catálogo de roles de ESP-IDP</a>.</li>
+</ol>
+<p><strong>Reglas</strong></p>
+<ul>
+<li>Solo entra quien está en el padrón.</li>
+<li>El código expira a los <strong>10 minutos</strong> (configurable).</li>
+<li>Tras <strong>3 intentos fallidos</strong> con el mismo código, el código queda invalidado y se DEBE pedir uno nuevo.</li>
+<li>Si el alumno no tiene contacto registrado, acude a control escolar, que <strong>registra su contacto en persona</strong> con <code>POST /v0/auth/activacion</code>. Desde ese momento el alumno entra con el flujo normal; no hay un código de activación aparte.</li>
+<li>Cambiar el contacto registrado solo se hace en persona ante control escolar, con la misma ruta.</li>
+<li>En <code>POST /v0/auth/sesion</code>, una matrícula que no está en el padrón responde 401 <code>codigo-invalido</code>, con el mismo cuerpo que un código incorrecto, para no revelar quién está inscrito (C-52).</li>
+<li>Cada inicio de sesión queda anotado con quién y cuándo.</li>
+</ul>
+<p><strong>Entrega y límites (ADR-009)</strong></p>
+<ul>
+<li><code>POST /v0/auth/codigo</code> responde siempre 202 con el mismo cuerpo, exista o no la matrícula. Si existe, el texto muestra el contacto enmascarado. Así no se puede sondear el padrón.</li>
+<li>Como mucho 3 solicitudes por matrícula cada 15 minutos y 20 por IP cada hora; al pasarse responde 429 <code>demasiadas-solicitudes</code>.</li>
+<li>Pedir un código nuevo invalida el anterior.</li>
+<li>El JWT de sesión dura 30 minutos (configurable).</li>
+<li>El código se envía con la operación <code>enviar_codigo(contacto, codigo, vence_en)</code> del puerto Notificador. Adaptadores: <code>buzon_simulado</code> (demo con la institución sintética, no envía nada), <code>correo</code> (paquete «Estándar»), y después <code>sms</code> y <code>whatsapp</code>. La institución elige el adaptador y su orden de respaldo en la configuración.</li>
+</ul>
+<p><strong>Nota sobre los tests de ESC-61:</strong> las pruebas C-26 a C-30, C-48 a C-50, C-52 y C-57 se incluyen en este documento para cubrir el MVP de constancias. Cuando ESP-IDP se revise para incluir ESC-61 formalmente, esas pruebas migrarán a ese documento.</p>
+<h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
+<p>La API tiene prefijo <code>/v0</code>. Todos los endpoints autenticados requieren el header <code>Authorization: Bearer {token}</code>. La verificación por QR (<code>GET /v0/verificar/{folio}</code>) es pública.</p>
+<p><strong>Auth</strong></p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Ruta</th>
+<th>Descripción</th>
+<th>Historia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/v0/auth/codigo</code></td>
+<td>Solicitar código de acceso. Responde siempre 202. Body: <code>{"matricula": "..."}</code></td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/v0/auth/sesion</code></td>
+<td>Canjear código por token de sesión. Body: <code>{"matricula": "...", "codigo": "123456"}</code></td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/v0/auth/activacion</code></td>
+<td>Control escolar registra en persona el contacto de un alumno. Body: <code>{"matricula": "...", "contacto": "..."}</code>. Responde 200; 404 <code>no-en-padron</code> si la matrícula no existe. Requiere rol <code>control_escolar</code>.</td>
+<td>ESC-61</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Plantillas</strong></p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Ruta</th>
+<th>Descripción</th>
+<th>Historia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v0/plantillas</code></td>
+<td>Listar plantillas vigentes.</td>
+<td>ESC-08</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/v0/plantillas</code></td>
+<td>Crear plantilla con un <code>id</code> nuevo (versión 1). Requiere rol <code>control_escolar</code>.</td>
+<td>ESC-08</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v0/plantillas/{id}</code></td>
+<td>Obtener una plantilla (versión activa).</td>
+<td>ESC-08</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><code>/v0/plantillas/{id}</code></td>
+<td>Crear la versión siguiente; la anterior queda <code>activa: false</code>. Requiere rol <code>control_escolar</code>.</td>
+<td>ESC-08</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Constancias</strong></p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Ruta</th>
+<th>Descripción</th>
+<th>Historia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/v0/constancias</code></td>
+<td>Emitir constancia. Body: <code>{"plantilla_id": "constancia-estudios"}</code>. Requiere sesión activa; el <code>sub</code> viene del token.</td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v0/constancias/{folio}</code></td>
+<td>Obtener la JWS de la constancia. Solo el alumno dueño del folio (el <code>sub</code> del token es el de la constancia) o el rol <code>control_escolar</code>; cualquier otro recibe 403 <code>sin-permiso</code>.</td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v0/constancias/{folio}/pdf</code></td>
+<td>Descargar el PDF firmado. Mismo permiso que la ruta anterior.</td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v0/verificar/{folio}</code></td>
+<td>Verificación pública. Sin autenticación. Respuestas en <a href="#respuesta-de-verificacion">Respuesta de verificación</a>.</td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/v0/constancias/{folio}/anular</code></td>
+<td>Anular constancia. Body: <code>{"motivo": "..."}</code>. Requiere rol <code>control_escolar</code>. Es idempotente: anular un folio ya anulado responde 200 con la anulación original y no cambia el motivo, quién ni cuándo.</td>
+<td>ESC-62</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reglas comunes</strong></p>
+<ul>
+<li>Los errores van en Problem Details (RFC 9457), campo <code>type</code> con URL estable.</li>
+<li>Las respuestas exitosas de emisión incluyen el folio y la URL de descarga del PDF.</li>
+<li>El servidor DEBE responder en menos de 60 segundos para ESC-05 (objetivo: menos de 5).</li>
+<li>Una plantilla vencida en <code>POST /v0/constancias</code> responde <code>422 plantilla-vencida</code>.</li>
+<li>Un alumno fuera del padrón en <code>POST /v0/constancias</code> responde <code>403 no-inscrito</code>.</li>
+<li>Las llaves públicas se publican en <code>GET /v0/llaves</code> (ADR-0010), definida en ESP-IDP.</li>
+</ul>
+<h2 id="errores">Errores<a class="headerlink" href="#errores" title="Permanent link">&para;</a></h2>
+<p>Todo error DEBE ir en formato Problem Details (RFC 9457). El campo <code>type</code> es una URL estable bajo <code>https://especificacion.example/errores/</code>.</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;https://especificacion.example/errores/codigo-expirado&quot;,
+  &quot;title&quot;: &quot;El código ha expirado&quot;,
+  &quot;status&quot;: 401,
+  &quot;detail&quot;: &quot;El código venció a las 2026-11-12T04:00:00Z.&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>HTTP</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>codigo-expirado</code></td>
+<td>401</td>
+<td>El código de acceso ya venció.</td>
+</tr>
+<tr>
+<td><code>codigo-invalido</code></td>
+<td>401</td>
+<td>Código incorrecto.</td>
+</tr>
+<tr>
+<td><code>codigo-bloqueado</code></td>
+<td>429</td>
+<td>Demasiados intentos fallidos; pedir código nuevo.</td>
+</tr>
+<tr>
+<td><code>no-en-padron</code></td>
+<td>404</td>
+<td>La matrícula no existe en el padrón. Solo sale en <code>POST /v0/auth/activacion</code>, que pide rol <code>control_escolar</code>. Ninguna ruta que se use sin sesión lo devuelve.</td>
+</tr>
+<tr>
+<td><code>no-inscrito</code></td>
+<td>403</td>
+<td>El alumno existe pero no está inscrito en el ciclo vigente.</td>
+</tr>
+<tr>
+<td><code>plantilla-vencida</code></td>
+<td>422</td>
+<td>La plantilla solicitada ya no está vigente.</td>
+</tr>
+<tr>
+<td><code>plantilla-no-encontrada</code></td>
+<td>404</td>
+<td>El id de plantilla no existe.</td>
+</tr>
+<tr>
+<td><code>folio-no-encontrado</code></td>
+<td>404</td>
+<td>El folio no existe en este plantel.</td>
+</tr>
+<tr>
+<td><code>constancia-anulada</code></td>
+<td>410</td>
+<td>La constancia existe pero fue anulada.</td>
+</tr>
+<tr>
+<td><code>sin-permiso</code></td>
+<td>403</td>
+<td>El rol del solicitante no permite esta operación.</td>
+</tr>
+<tr>
+<td><code>demasiadas-solicitudes</code></td>
+<td>429</td>
+<td>Se pasó un límite de solicitudes: códigos por matrícula o por IP, o verificaciones por IP.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pruebas-de-conformidad">Pruebas de conformidad<a class="headerlink" href="#pruebas-de-conformidad" title="Permanent link">&para;</a></h2>
+<p>Las pruebas C-26 a C-57 cubren este subsistema. Las pruebas C-01 a C-25 pertenecen a ESP-IDP y ESP-PLA y son prerrequisito.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pieza</th>
+<th>Dado</th>
+<th>Se espera</th>
+<th>Historia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-26</td>
+<td>POST /v0/auth/codigo</td>
+<td>matrícula con contacto registrado en padrón</td>
+<td>202; código enviado al contacto, que la respuesta muestra enmascarado</td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-27</td>
+<td>POST /v0/auth/sesion</td>
+<td>código correcto dentro de 10 min</td>
+<td>200; JWT de sesión con <code>roles: ["alumno"]</code> y los claims de ESP-IDP</td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-28</td>
+<td>POST /v0/auth/sesion</td>
+<td>código correcto después de 10 min</td>
+<td>401 <code>codigo-expirado</code></td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-29</td>
+<td>POST /v0/auth/sesion</td>
+<td>código incorrecto en el 3.° intento</td>
+<td>429 <code>codigo-bloqueado</code></td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-30</td>
+<td>POST /v0/auth/activacion</td>
+<td>rol <code>control_escolar</code>, matrícula sin contacto, contacto nuevo</td>
+<td>200; el contacto queda registrado y un <code>POST /v0/auth/codigo</code> posterior lo envía ahí</td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-31</td>
+<td>GET /v0/plantillas</td>
+<td>—</td>
+<td>200; lista de plantillas con vigencia y versión</td>
+<td>ESC-08</td>
+</tr>
+<tr>
+<td>C-32</td>
+<td>PUT /v0/plantillas/{id}</td>
+<td>plantilla existente en versión 1</td>
+<td>versión 2 queda <code>activa: true</code> y la 1 <code>activa: false</code> en la misma transacción; una constancia ya emitida con la 1 sigue «válida»</td>
+<td>ESC-08</td>
+</tr>
+<tr>
+<td>C-33</td>
+<td>POST /v0/constancias</td>
+<td>plantilla cuya <code>vigencia_fin</code> ya pasó</td>
+<td>422 <code>plantilla-vencida</code></td>
+<td>ESC-08</td>
+</tr>
+<tr>
+<td>C-34</td>
+<td>POST /v0/constancias</td>
+<td>alumno inscrito, plantilla vigente</td>
+<td>201; <code>folio</code> único, JWS con firma EdDSA válida</td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td>C-35</td>
+<td>GET /v0/constancias/{folio}</td>
+<td>folio existente</td>
+<td>200; JWS íntegro recuperable</td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td>C-36</td>
+<td>GET /v0/constancias/{folio}/pdf</td>
+<td>folio existente</td>
+<td>200; PDF con datos correctos y QR apuntando a <code>/verificar/{folio}</code></td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td>C-37</td>
+<td>POST /v0/constancias</td>
+<td>alumno no inscrito en el ciclo activo</td>
+<td>403 <code>no-inscrito</code></td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td>C-38</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>folio existente, constancia vigente</td>
+<td>200; <code>resultado: "valida"</code>, <code>jws</code> y <code>datos_visibles</code>, sin autenticación</td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-39</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>folio inexistente</td>
+<td>404 <code>folio-no-encontrado</code></td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-40</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>folio de constancia anulada</td>
+<td>410 <code>constancia-anulada</code> con <code>resultado: "anulada"</code> y <code>datos_visibles</code></td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-41</td>
+<td>Verificación EdDSA</td>
+<td>JWS con <code>kid: constancia-*</code>, clave pública disponible en JWKS</td>
+<td>firma matemáticamente válida; payload decodifica correctamente</td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-42</td>
+<td>Verificación de estado</td>
+<td>folio anulado en el servidor; JWS con firma válida</td>
+<td>resultado «anulada» aunque la firma sea válida</td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-43</td>
+<td>POST /v0/constancias/{folio}/anular</td>
+<td>funcionario con rol <code>control_escolar</code></td>
+<td>200; <code>anulada: true</code> persiste en BD</td>
+<td>ESC-62</td>
+</tr>
+<tr>
+<td>C-44</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>folio anulado en C-43</td>
+<td>410 <code>constancia-anulada</code></td>
+<td>ESC-62</td>
+</tr>
+<tr>
+<td>C-45</td>
+<td>GET /v0/constancias/{folio}/pdf</td>
+<td>folio existente</td>
+<td>PDF/A-2b con adjunto constancia.jws idéntico a la JWS guardada y folio legible</td>
+<td>ESC-05</td>
+</tr>
+<tr>
+<td>C-46</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>constancia vigente</td>
+<td>200; CURP enmascarada, sin matrícula en la respuesta</td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-47</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>constancia vigente firmada con una llave constancia-* ya rotada</td>
+<td>200; <code>resultado: "valida"</code>; la llave sigue en <code>GET /v0/llaves</code> y la página verifica la firma</td>
+<td>ESC-07, ESC-63</td>
+</tr>
+<tr>
+<td>C-48</td>
+<td>POST /v0/auth/codigo</td>
+<td>matrícula que no está en el padrón</td>
+<td>202 con el mismo cuerpo que una matrícula existente; no se envía nada</td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-49</td>
+<td>POST /v0/auth/codigo</td>
+<td>4.ª solicitud de la misma matrícula en 15 minutos</td>
+<td>429 <code>demasiadas-solicitudes</code></td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-50</td>
+<td>POST /v0/auth/sesion</td>
+<td>código anterior, después de pedir uno nuevo</td>
+<td>401 <code>codigo-invalido</code></td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-51</td>
+<td>GET /v0/constancias/{folio} y /pdf</td>
+<td>sesión de un alumno que no es dueño del folio</td>
+<td>403 <code>sin-permiso</code>; con el alumno dueño o con rol <code>control_escolar</code> responde 200</td>
+<td>ESC-05, ESC-19</td>
+</tr>
+<tr>
+<td>C-52</td>
+<td>POST /v0/auth/sesion</td>
+<td>matrícula que no está en el padrón, cualquier código</td>
+<td>401 <code>codigo-invalido</code>, con el mismo cuerpo que un código incorrecto</td>
+<td>ESC-61</td>
+</tr>
+<tr>
+<td>C-53</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>61.ª consulta de la misma IP en un minuto</td>
+<td>429 <code>demasiadas-solicitudes</code></td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-54</td>
+<td>POST /v0/constancias/{folio}/anular</td>
+<td>folio ya anulado, motivo distinto</td>
+<td>200 con la anulación original; motivo, quién y cuándo no cambian</td>
+<td>ESC-62</td>
+</tr>
+<tr>
+<td>C-55</td>
+<td>Verificación de firma</td>
+<td>constancia firmada con una llave constancia-* revocada</td>
+<td>el <code>kid</code> ya no está en <code>GET /v0/llaves</code>; la página muestra «firma inválida»</td>
+<td>ESC-07, ESC-63</td>
+</tr>
+<tr>
+<td>C-56</td>
+<td>GET /v0/verificar/{folio}</td>
+<td>constancia no anulada cuyo <code>exp</code> ya pasó</td>
+<td>200; <code>resultado: "vencida"</code></td>
+<td>ESC-07</td>
+</tr>
+<tr>
+<td>C-57</td>
+<td>POST /v0/auth/activacion</td>
+<td>rol <code>control_escolar</code>, matrícula que no está en el padrón</td>
+<td>404 <code>no-en-padron</code></td>
+<td>ESC-61</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vectores-de-prueba">Vectores de prueba<a class="headerlink" href="#vectores-de-prueba" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Este vector contradice la especificación</p>
+<p>El payload de abajo no cumple con esta versión: <code>jti</code> no es UUID, <code>plantilla</code> es un objeto, los nombres de <code>datos</code> son otros, falta la CURP, lleva <code>anulada</code> dentro de la JWS, el <code>sub</code> es la matrícula y la llave no trae su parte privada. Se corrige en un PCE aparte: ver P-13 en <a href="../pendientes/">Pendientes conocidos</a>. No lo uses para probar.</p>
+</div>
+<p><strong>Clave Ed25519 de prueba</strong> — sólo para tests, nunca en producción:</p>
+<pre><code class="language-json">{
+  &quot;kid&quot;: &quot;constancia-test-2026&quot;,
+  &quot;alg&quot;: &quot;EdDSA&quot;,
+  &quot;crv&quot;: &quot;Ed25519&quot;,
+  &quot;x&quot;: &quot;11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo&quot;
+}
+</code></pre>
+<p><strong>Payload mínimo válido (C-34, C-41):</strong></p>
+<pre><code class="language-json">{
+  &quot;jti&quot;: &quot;CON-2026-000001&quot;,
+  &quot;iss&quot;: &quot;https://cbtis-001.edu.mx&quot;,
+  &quot;iat&quot;: 1762992000,
+  &quot;exp&quot;: 1794528000,
+  &quot;typ&quot;: &quot;estudios&quot;,
+  &quot;sub&quot;: &quot;12345678&quot;,
+  &quot;plantilla&quot;: { &quot;id&quot;: &quot;constancia-estudios&quot;, &quot;version&quot;: 1 },
+  &quot;datos&quot;: {
+    &quot;nombre_completo&quot;: &quot;Ana López Martínez&quot;,
+    &quot;matricula&quot;: &quot;12345678&quot;,
+    &quot;grado&quot;: 3,
+    &quot;grupo&quot;: &quot;A&quot;,
+    &quot;turno&quot;: &quot;matutino&quot;,
+    &quot;ciclo_escolar&quot;: &quot;2026-2027&quot;
+  },
+  &quot;anulada&quot;: false
+}
+</code></pre>
+<blockquote>
+<p>Las pruebas de integración DEBEN usar un servidor local con estas claves de prueba; nunca apuntar a un plantel real.</p>
+</blockquote>
+<h2 id="criterio-de-adopcion">Criterio de adopción<a class="headerlink" href="#criterio-de-adopcion" title="Permanent link">&para;</a></h2>
+<p>Cada nivel es un <strong>conjunto cerrado bajo “depende de”</strong>. El nivel 2 es el mínimo para declarar adopción del subsistema en el radar.</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Nombre</th>
+<th>Historias requeridas</th>
+<th>Pruebas que DEBEN pasar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Sin sistema</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Base</td>
+<td>ESC-44, ESC-19, ESC-63</td>
+<td>C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Adopción mínima</td>
+<td>Nivel 1 + ESC-61, ESC-08, ESC-05</td>
+<td>C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-37, C-45, C-48..C-52, C-57</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Adopción plena</td>
+<td>Nivel 2 + ESC-07, ESC-62</td>
+<td>C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-57</td>
+</tr>
+<tr>
+<td>4</td>
+<td><em>(no definido todavía)</em></td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cobertura:</strong> se mide como <code>historias implementadas ÷ historias del nivel × 100 %</code>. Un plantel declara el nivel más alto cuyo conjunto completo de historias está implementado y cuyas pruebas pasan.</p>
+<p><strong>El demo de referencia alcanza nivel 3</strong> con una institución sintética de \~800 alumnos, una plantilla «constancia de estudios» y una clave de firma Ed25519 local.</p>
+<blockquote>
+<p>El radar de adopción usa el nivel alcanzado (0–4) como valor del eje «Constancias y verificación». El radar se describe en el <a href="../">índice de especificaciones</a>.</p>
+</blockquote>
+<h2 id="fuera-de-v03-y-preguntas-abiertas">Fuera de v0.3 y preguntas abiertas<a class="headerlink" href="#fuera-de-v03-y-preguntas-abiertas" title="Permanent link">&para;</a></h2>
+<h3 id="no-incluido-en-esta-version">No incluido en esta versión<a class="headerlink" href="#no-incluido-en-esta-version" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Estado</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firma autógrafa del director (imagen o e.firma SAT)</td>
+<td>Horizonte</td>
+<td>Requiere ADR propio; complejidad legal y técnica alta</td>
+</tr>
+<tr>
+<td>Cola de revisión previa (ESC-06)</td>
+<td>Horizonte</td>
+<td>Activar con <code>requiere_revision: true</code> en la plantilla</td>
+</tr>
+<tr>
+<td>Tipos adicionales: traslado, historial de calificaciones, conducta</td>
+<td>Horizonte</td>
+<td>Nuevas plantillas; misma infraestructura de firma</td>
+</tr>
+<tr>
+<td>Tutores y padres solicitando constancias (ESC-21)</td>
+<td>Horizonte</td>
+<td>Rol <code>tutor</code>; requiere relación tutor-alumno en padrón</td>
+</tr>
+<tr>
+<td>Expediente digital (ESC-10, ESC-11)</td>
+<td>Otro subsistema</td>
+<td>Pertenece a «Control escolar»</td>
+</tr>
+<tr>
+<td>Firma múltiple director + secretario</td>
+<td>No considerado</td>
+<td>Esperar caso de uso real antes de diseñar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pendientes-conocidos">Pendientes conocidos<a class="headerlink" href="#pendientes-conocidos" title="Permanent link">&para;</a></h3>
+<p>Las incongruencias que se encontraron y no se resolvieron en esta versión están en <a href="../pendientes/">Pendientes conocidos</a>, cada una con el PCE donde se resuelve.</p>
+<h3 id="supuestos-del-padron">Supuestos del padrón<a class="headerlink" href="#supuestos-del-padron" title="Permanent link">&para;</a></h3>
+<p>La especificación asume que <code>Alumno</code> incluye al menos: matrícula, nombre, CURP, contacto (correo o teléfono), semestre, grupo, turno y ciclo activo. Son los campos que lleva la plantilla. Si el padrón de la institución usa campos distintos, se requiere un adaptador antes del puerto <code>Padrón</code>.</p>
+<h3 id="preguntas-abiertas">Preguntas abiertas<a class="headerlink" href="#preguntas-abiertas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Sin contacto en padrón:</strong> ¿cómo se comunica el código a un alumno cuyo padrón no tiene correo ni teléfono? Hoy: activación presencial (C-30). ¿Se necesita un canal adicional?</li>
+<li><strong>Migración de ESC-61 a ESP-IDP:</strong> las pruebas C-26–C-30, C-48–C-50, C-52 y C-57 viven temporalmente en ESP-CON. Cuando ESP-IDP v0.3 incluya formalmente ESC-61, se mueven allá y aquí queda sólo la referencia cruzada.</li>
+<li><strong>Rotación de clave de firma:</strong> ¿qué pasa con constancias ya emitidas si se rota el par <code>constancia-*</code>? Resuelto en ADR-008 y precisado en ADR-0011: rotar deja la llave anterior publicada para verificar hasta que venza lo último que firmó; retirarla es quitarla después de eso; revocarla (robo) la quita de inmediato. Todas llevan <code>use: "sig"</code>, porque <code>verify-only</code> no es un valor válido de <code>use</code> en RFC 7517.</li>
+<li><strong>Formato del PDF:</strong> ADR-008 fija PDF/A-2b, la JWS adjunta y el QR; esta versión no prescribe márgenes, tipografía ni logotipo; eso queda como configuración de plantilla. Puede requerir un ADR si la SEP establece un formato oficial.</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.action.edit"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -30,20 +30,20 @@ Reglas básicas:
 - Ninguna especificación nace sin un paquete de historias seleccionado para construirse.
 - Un subsistema depende de la interfaz publicada de otro en una versión concreta, no de cómo está hecho por dentro.
 
-**Toda especificación incluye una sección «Criterio de adopción».** Ahí define, para los niveles 0 a 4, qué historias y qué pruebas de conformidad debe cumplir una escuela para declarar cada nivel, y cómo se mide la cobertura con los hechos. Cada nivel debe estar cerrado bajo «depende de». El nivel 2 es el mínimo para declararse adoptado. Ejemplo: la [especificación de acceso](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ).
+**Toda especificación incluye una sección «Criterio de adopción».** Ahí define, para los niveles 0 a 4, qué historias y qué pruebas de conformidad debe cumplir una escuela para declarar cada nivel, y cómo se mide la cobertura con los hechos. Cada nivel debe estar cerrado bajo «depende de», y sus pruebas solo pueden usar historias de ese nivel o de los anteriores ([ADR-0013](../adr/0013-pruebas-de-cada-nivel.md)). El nivel 2 es el mínimo para declararse adoptado. Ejemplo: la [especificación de acceso](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ).
 
 ## Especificaciones
 
 | ID | Especificación | Subsistema | Versión | Estado | Editor | Historias que cubre | Pruebas |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| ESP-IDP | [Identidad y acceso a la plataforma](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ) | Identidad y acceso a la plataforma (la base) | 0.1 | Borrador | Samuel Gómez | ESC-19, 38, 44, 45, 46 | C-01 a C-07, C-18, C-19, C-20, C-24 |
-| ESP-PLA | [Acceso al plantel](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ) | Acceso al plantel | 0.1 | Borrador | Samuel Gómez | ESC-29, 39 a 43, 47, 48 | C-08 a C-17, C-21 a C-23, C-25 |
-| ESP-CON | [Constancias y verificación](https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv) | Constancias y verificación | 0.2 | Borrador | Samuel Gómez | ESC-05, 07, 08, 19, 44, 61, 62, 63 | C-26 a C-50 |
+| ESP-IDP | [Identidad y acceso a la plataforma](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ) | Identidad y acceso a la plataforma (la base) | 0.2 | Borrador | Samuel Gómez | ESC-19, 38, 44, 45, 46 | C-01 a C-07, C-18, C-19, C-20, C-24 |
+| ESP-PLA | [Acceso al plantel](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ) | Acceso al plantel | 0.2 | Borrador | Samuel Gómez | ESC-29, 39 a 43, 47, 48 | C-08 a C-17, C-21 a C-23, C-25 |
+| ESP-CON | [Constancias y verificación](https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv) | Constancias y verificación | 0.4 | Borrador | Samuel Gómez | ESC-05, 07, 08, 19, 44, 61, 62, 63 | C-26 a C-60 |
 | ESP-COM | Convenciones comunes | Todos | — | Por separar | Samuel Gómez | — | — |
 
 ESP-IDP y ESP-PLA viven por ahora en un mismo documento, «Especificación v0.1», y se separan al pasar al repositorio. Antes se llamaban juntas ESP-ACC. ESP-CON tiene documento propio.
 
-**Criterio de adopción de ESP-CON:** nivel 2 = ESC-44, 19, 63, 61, 08, 05; nivel 3 = nivel 2 + ESC-07, 62. ESC-44, 19, 61 y 63 son de Identidad: ESP-CON las exige, no es su dueña. ESC-61 (identificación sin contraseña) y ESC-63 (llaves de firma) se especifican por ahora dentro de ESP-CON, con sus pruebas C-26 a C-30, C-48 a C-50, C-52 y C-57, y pasan a ESP-IDP en su versión 0.3.
+**Criterio de adopción de ESP-CON:** nivel 1 = ESC-44, 63; nivel 2 = nivel 1 + ESC-19, 61, 08, 05; nivel 3 = nivel 2 + ESC-07, 62. ESC-44, 19, 61 y 63 son de Identidad: ESP-CON las exige, no es su dueña, y no pide la credencial ni la puerta. ESC-61 (identificación sin contraseña) y ESC-63 (llaves de firma) se especifican por ahora dentro de ESP-CON, con sus pruebas C-26 a C-30, C-48 a C-50, C-52, C-57 y C-58, y pasan a ESP-IDP en su versión 0.3. C-59 (ESC-19) también vive por ahora en ESP-CON.
 
 **ESP-COM** todavía no es un documento aparte. Sus reglas (identidad y roles, IDs UUIDv7, horas en UTC, texto en NFC, errores Problem Details, autenticación OIDC, idempotencia, versiones) viven hoy en la sección «Alcance y convenciones» del documento de la especificación v0.1. ESP-CON, la segunda especificación con documento propio, ya repite varias de ellas (UTC, NFC) en sus convenciones: el disparador se cumplió y toca separarlas.
 

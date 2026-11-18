@@ -19,7 +19,7 @@ Como **responsable administrativo**, quiero **definir la plantilla oficial de ca
 
 ## Pruebas de conformidad
 
-- C-31 a C-33 (de ESP-CON v0.2; el catálogo de origen decía «por definir»)
+- C-31 a C-33, C-60 (de ESP-CON v0.2, C-60 desde v0.4; el catálogo de origen decía «por definir»)
 
 ## Relaciones
 

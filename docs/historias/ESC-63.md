@@ -21,7 +21,7 @@ Como **responsable del sistema**, quiero **generar, guardar y rotar las llaves c
 
 ## Pruebas de conformidad
 
-- C-03, C-47, C-55 (de ESP-CON v0.3; el catálogo de origen decía «C-03»)
+- C-03, C-47, C-55 (de ESP-CON v0.3; el catálogo de origen decía «C-03»), C-58 (de ESP-CON v0.4)
 
 ## Relaciones
 

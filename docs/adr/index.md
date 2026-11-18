@@ -18,6 +18,7 @@ a esa implementación (lenguaje, framework) viven allá.
 | [0010](0010-ruta-del-jwks.md) | Las llaves públicas se publican en `GET /v0/llaves` | aceptada | aquí |
 | [0011](0011-rotar-retirar-revocar-llaves.md) | Rotar, retirar y revocar una llave son tres cosas distintas | aceptada | aquí |
 | [0012](0012-catalogo-de-roles.md) | Un solo catálogo de roles y un token de sesión definido | aceptada | aquí |
+| [0013](0013-pruebas-de-cada-nivel.md) | Las pruebas de un nivel solo usan historias de ese nivel o de los anteriores | aceptada | aquí |
 
 Migradas el 2026-11-13 desde [Diseño del MVP](https://claude.ai/artifact/8z2qFXRnnrty1u4cJAGH4R) (0001–0007) y
 [Decisiones de diseño: MVP de constancias](https://claude.ai/artifact/BFv1HemHiY2yqZoTx7jqoc) (0008–0009).

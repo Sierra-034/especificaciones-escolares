@@ -21,7 +21,7 @@ Como **alumno o tutor**, quiero **descargar la constancia de estudios cuando la 
 
 ## Pruebas de conformidad
 
-- C-34 a C-37, C-45, C-51 (de ESP-CON v0.3; el catálogo de origen decía «por definir»)
+- C-33 a C-37, C-45, C-51 (de ESP-CON v0.3, C-33 desde v0.4; el catálogo de origen decía «por definir»)
 
 ## Relaciones
 

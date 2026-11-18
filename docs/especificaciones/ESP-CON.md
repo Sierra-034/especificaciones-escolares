@@ -1,11 +1,13 @@
 ---
 id: ESP-CON
-version: 0.3.1
+version: 0.4.0
 estado: borrador
 ---
-# ESP-CON · Constancias y verificación (v0.3)
+# ESP-CON · Constancias y verificación (v0.4)
 
 > Migrado el 2026-11-13 desde [Especificación v0.2: constancias y verificación (ESP-CON)](https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv) (fecha del original: 2026-11-12). Texto copiado sin cambios; la fuente de verdad desde ahora es este archivo.
+
+**Versión 0.4 (2026-11-18).** Resuelve P-20: cada nivel del [criterio de adopción](#criterio-de-adopcion) pide solo pruebas de las historias de ese nivel o de los anteriores ([ADR-0013](../adr/0013-pruebas-de-cada-nivel.md)). Una escuela que adopta solo constancias ya puede declarar cualquier nivel sin la credencial ni la puerta. ESC-19 pasa del nivel 1 al 2, porque su prueba necesita la sesión de ESC-61. Agrega C-58 (llaves publicadas, ESC-63), C-59 (el rol `alumno` no puede activar, ESC-19) y C-60 (lo emitido con una versión anterior de la plantilla sigue válido). C-32 ya no comprueba la verificación: eso pasó a C-60.
 
 **Versión 0.3.1 (2026-11-17).** Agrega la [Guía de adopción](#guia-de-adopcion): separa el **criterio de adopción** (qué declara una escuela) de la **ruta de implementación** (en qué orden se construye y qué se prueba en cada paso), con las dependencias entre historias y cómo se mide el avance para el radar. Corrige la dependencia de ESC-61, que también depende de ESC-19. No cambia comportamiento ni pruebas.
 
@@ -15,7 +17,7 @@ estado: borrador
 
 ## Alcance y convenciones
 
-ESP-CON v0.3 cubre el subsistema **Constancias y verificación**: emitir constancias de estudios en autoservicio, verificarlas por QR e invalidarlas. Requiere que el subsistema **Identidad y acceso a la plataforma** (ESP-IDP) esté en nivel 2: padrón importado (ESC-44), roles mínimos (ESC-19), llaves de firma (ESC-63) e identificación sin contraseña (ESC-61).
+ESP-CON v0.4 cubre el subsistema **Constancias y verificación**: emitir constancias de estudios en autoservicio, verificarlas por QR e invalidarlas. Usa cuatro historias del subsistema **Identidad y acceso a la plataforma** (ESP-IDP): padrón importado (ESC-44), roles mínimos (ESC-19), llaves de firma (ESC-63) e identificación sin contraseña (ESC-61). No requiere la credencial ni la puerta: el [criterio de adopción](#criterio-de-adopcion) dice qué pruebas pide de Identidad.
 
 **Palabras normativas** (con el sentido de RFC 2119): **DEBE** es obligatorio. **DEBERÍA** es recomendado. **PUEDE** es opcional.
 
@@ -92,7 +94,7 @@ Una constancia es un JWS (JSON Web Signature) con algoritmo EdDSA, igual que la 
 | `iss` | string | Id del plantel. |
 | `iat` | number | Momento de emisión (epoch UTC). |
 | `exp` | number | Vencimiento (fin del ciclo escolar, epoch UTC). |
-| `typ` | string | Tipo de constancia. En v0.3 solo existe `estudios`. |
+| `typ` | string | Tipo de constancia. En v0.4 solo existe `estudios`. |
 | `sub` | string | Id opaco del alumno. |
 | `plantilla` | string | `{id}@{version}` de la plantilla usada. |
 | `datos` | object | Campos del alumno según la plantilla (nombre, CURP, matrícula, semestre, grupo, turno, ciclo). |
@@ -257,7 +259,7 @@ Todo error DEBE ir en formato Problem Details (RFC 9457). El campo `type` es una
 
 ## Pruebas de conformidad
 
-Las pruebas C-26 a C-57 cubren este subsistema. Las pruebas C-01 a C-25 pertenecen a ESP-IDP y ESP-PLA y son prerrequisito.
+Las pruebas C-26 a C-60 cubren este subsistema. Las pruebas C-01 a C-25 pertenecen a ESP-IDP y ESP-PLA; de ellas, ESP-CON solo pide C-18, en su parte del servidor (ver [Criterio de adopción](#criterio-de-adopcion)).
 
 | ID | Pieza | Dado | Se espera | Historia |
 | --- | --- | --- | --- | --- |
@@ -267,8 +269,8 @@ Las pruebas C-26 a C-57 cubren este subsistema. Las pruebas C-01 a C-25 pertenec
 | C-29 | POST /v0/auth/sesion | código incorrecto en el 3.° intento | 429 `codigo-bloqueado` | ESC-61 |
 | C-30 | POST /v0/auth/activacion | rol `control_escolar`, matrícula sin contacto, contacto nuevo | 200; el contacto queda registrado y un `POST /v0/auth/codigo` posterior lo envía ahí | ESC-61 |
 | C-31 | GET /v0/plantillas | — | 200; lista de plantillas con vigencia y versión | ESC-08 |
-| C-32 | PUT /v0/plantillas/{id} | plantilla existente en versión 1 | versión 2 queda `activa: true` y la 1 `activa: false` en la misma transacción; una constancia ya emitida con la 1 sigue «válida» | ESC-08 |
-| C-33 | POST /v0/constancias | plantilla cuya `vigencia_fin` ya pasó | 422 `plantilla-vencida` | ESC-08 |
+| C-32 | PUT /v0/plantillas/{id} | plantilla existente en versión 1 | versión 2 queda `activa: true` y la 1 `activa: false` en la misma transacción; `GET /v0/plantillas/{id}` devuelve la 2. Lo ya emitido con la 1 se prueba en C-60 | ESC-08 |
+| C-33 | POST /v0/constancias | plantilla cuya `vigencia_fin` ya pasó | 422 `plantilla-vencida` | ESC-08, ESC-05 |
 | C-34 | POST /v0/constancias | alumno inscrito, plantilla vigente | 201; `folio` único, JWS con firma EdDSA válida | ESC-05 |
 | C-35 | GET /v0/constancias/{folio} | folio existente | 200; JWS íntegro recuperable | ESC-05 |
 | C-36 | GET /v0/constancias/{folio}/pdf | folio existente | 200; PDF con datos correctos y QR apuntando a `/verificar/{folio}` | ESC-05 |
@@ -293,6 +295,9 @@ Las pruebas C-26 a C-57 cubren este subsistema. Las pruebas C-01 a C-25 pertenec
 | C-55 | Verificación de firma | constancia firmada con una llave constancia-\* revocada | el `kid` ya no está en `GET /v0/llaves`; la página muestra «firma inválida» | ESC-07, ESC-63 |
 | C-56 | GET /v0/verificar/{folio} | constancia no anulada cuyo `exp` ya pasó | 200; `resultado: "vencida"` | ESC-07 |
 | C-57 | POST /v0/auth/activacion | rol `control_escolar`, matrícula que no está en el padrón | 404 `no-en-padron` | ESC-61 |
+| C-58 | GET /v0/llaves | servidor con su llave de constancias configurada; sin autenticación | 200; JWKS (RFC 7517) con al menos una llave cuyo `kid` empieza por `constancia-`, con `kty: "OKP"`, `crv: "Ed25519"` y `use: "sig"`; ninguna llave trae la parte privada (`d`) | ESC-63 |
+| C-59 | POST /v0/auth/activacion | sesión cuyo token solo trae `roles: ["alumno"]`; matrícula del padrón y contacto nuevo | 403 `sin-permiso`; el contacto registrado no cambia | ESC-19 |
+| C-60 | GET /v0/verificar/{folio} | constancia emitida con la versión 1 de una plantilla que después pasó a la versión 2 (C-32) | 200; `resultado: "valida"`; el `plantilla` de la JWS sigue siendo `{id}@1` | ESC-07, ESC-08 |
 
 ### Vectores de prueba
 
@@ -378,15 +383,19 @@ ESC-44, ESC-19, ESC-61 y ESC-63 son de Identidad: ESP-CON las exige, no es su du
 | Nivel | Nombre | Historias requeridas | Pruebas que DEBEN pasar |
 | --- | --- | --- | --- |
 | 0 | Sin sistema | — | — |
-| 1 | Base | ESC-44, ESC-19, ESC-63 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP) |
-| 2 | Adopción mínima | Nivel 1 + ESC-61, ESC-08, ESC-05 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-37, C-45, C-48..C-52, C-57 |
-| 3 | Adopción plena | Nivel 2 + ESC-07, ESC-62 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-57 |
+| 1 | Base | ESC-44, ESC-63 | C-18 (de ESP-IDP, solo la parte del servidor), C-58 |
+| 2 | Adopción mínima | Nivel 1 + ESC-19, ESC-61, ESC-08, ESC-05 | Las del nivel 1 + C-26..C-37, C-45, C-48..C-52, C-57, C-59 |
+| 3 | Adopción plena | Nivel 2 + ESC-07, ESC-62 | Las del nivel 1 + C-26..C-60 |
 | 4 | *(no definido todavía)* | — | — |
 
 Un plantel declara el nivel más alto cuyo conjunto completo de historias está implementado y cuyas pruebas pasan.
 
-!!! note "Pruebas de ESP-IDP que este subsistema no puede correr solo"
-    C-01 a C-07, C-19, C-20 y C-24 usan la credencial y el registro de entradas (ESC-29, ESC-38, ESC-45, ESC-46 y la puerta de ESP-PLA), que no están en ningún nivel de esta tabla. Una escuela que adopta solo constancias no puede pasarlas. Se resuelve en un PCE aparte: ver P-20 en [Pendientes conocidos](pendientes.md).
+**Cada prueba de un nivel usa solo historias de ese nivel o de los anteriores** ([ADR-0013](../adr/0013-pruebas-de-cada-nivel.md)). Así cada nivel se puede comprobar por sí solo. Por eso ESC-19 está en el nivel 2 y no en el 1: su prueba (C-59) necesita la sesión de ESC-61.
+
+!!! note "Lo que ESP-CON pide de Identidad"
+    De ESP-IDP, ESP-CON pide cuatro historias (ESC-44, ESC-19, ESC-63 y ESC-61) y, de las pruebas C-01 a C-25, solo C-18 en su parte del servidor. No pide la credencial ni la puerta (C-01 a C-07, C-19, C-20, C-24): una escuela que adopta solo constancias puede llegar al nivel 3.
+
+    El eje de Identidad del radar se mide aparte, con su propio criterio (hoy en [ESP-PLA](ESP-PLA.md)). Esa misma escuela puede tener Constancias en nivel 3 e Identidad por debajo del 2, y el radar lo muestra así.
 
 **El demo de referencia alcanza nivel 3** con una institución sintética de \~800 alumnos, una plantilla «constancia de estudios» y una clave de firma Ed25519 local.
 
@@ -398,17 +407,17 @@ Un plantel declara el nivel más alto cuyo conjunto completo de historias está 
 
 La ruta se lee de arriba abajo. Las historias de una misma **etapa** no dependen entre sí: se pueden hacer en cualquier orden o al mismo tiempo. Una historia empieza cuando las historias de las que depende ya pasan sus pruebas.
 
-Cada prueba aparece en el **primer paso en que existen todas las rutas que usa**, aunque cite otra historia. Por eso C-33 (cita ESC-08) se corre en el paso de ESC-05, que es quien expone `POST /v0/constancias`.
+Cada prueba aparece en el **primer paso en que existen todas las rutas que usa**, aunque cite otra historia. Por eso C-33 se corre en el paso de ESC-05, que es quien expone `POST /v0/constancias`, y C-59, la prueba de ESC-19, en el paso de ESC-61, que es quien da la sesión.
 
 | Etapa | Paso | Historia | Depende de | Pruebas que se corren al terminar el paso | Completa el nivel | Qué se tiene al terminar |
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 1 | ESC-44 | — | C-18 | — | Padrón de la institución sintética cargado, con los textos en NFC. |
-| 0 | 2 | ESC-19 | — | Ninguna propia todavía (C-19 usa el registro de entradas; C-51 va en el paso 6). Ver P-20. | — | Token de sesión con `roles`; 403 `sin-permiso` si falta el rol. |
-| 0 | 3 | ESC-63 | — | Ninguna propia todavía (C-47 y C-55 van en el paso 7). Ver P-16 y P-20. | 1 | Llave `constancia-*` publicada en `GET /v0/llaves`. |
-| 1 | 4 | ESC-61 | ESC-44, ESC-19 | C-26..C-30, C-48..C-50, C-52, C-57 | — | El alumno entra con código; el adaptador `buzon_simulado` del Notificador basta para el demo. |
-| 1 | 5 | ESC-08 | ESC-19 | C-31; C-32 hasta «la 1 queda `activa: false`» | — | Plantilla «constancia de estudios» versionada. |
+| 0 | 2 | ESC-63 | — | C-58 | 1 | Llave `constancia-*` publicada en `GET /v0/llaves`. |
+| 0 | 3 | ESC-19 | — | Ninguna en este paso: su prueba, C-59, necesita la sesión y se corre en el paso 4. | — | Token de sesión con `roles`; 403 `sin-permiso` si falta el rol. |
+| 1 | 4 | ESC-61 | ESC-44, ESC-19 | C-26..C-30, C-48..C-50, C-52, C-57, C-59 | — | El alumno entra con código; el adaptador `buzon_simulado` del Notificador basta para el demo. |
+| 1 | 5 | ESC-08 | ESC-19 | C-31, C-32 | — | Plantilla «constancia de estudios» versionada. |
 | 2 | 6 | ESC-05 | ESC-08, ESC-61, ESC-63 | C-33..C-37, C-45, C-51 | 2 | El alumno descarga su constancia en PDF/A-2b, firmada, con folio y QR. |
-| 3 | 7 | ESC-07 | ESC-05 | C-38..C-42, C-46, C-47, C-53, C-55, C-56; C-32 completa | — | Cualquiera verifica una constancia abriendo su QR. |
+| 3 | 7 | ESC-07 | ESC-05 | C-38..C-42, C-46, C-47, C-53, C-55, C-56, C-60 | — | Cualquiera verifica una constancia abriendo su QR. |
 | 4 | 8 | ESC-62 | ESC-07 | C-43, C-44, C-54 | 3 | Control escolar anula una constancia y la verificación lo muestra. |
 
 **Camino crítico:** cinco pasos, por ejemplo ESC-44 → ESC-61 → ESC-05 → ESC-07 → ESC-62. Ninguna implementación puede llegar al nivel 3 en menos pasos seguidos, aunque tenga más personas: lo que sí se reparte son las etapas 0 y 1.
@@ -417,8 +426,8 @@ Cada prueba aparece en el **primer paso en que existen todas las rutas que usa**
 
 **Lo que la ruta necesita y la especificación todavía no define:**
 
-- Administrar llaves (generar, rotar, retirar, revocar) no tiene API (P-16). Mientras tanto, el paso 3 crea la llave por configuración del servidor.
-- Asignar los roles distintos de `alumno` no está especificado (P-18). Mientras tanto, el paso 2 los carga a mano para la institución sintética.
+- Administrar llaves (generar, rotar, retirar, revocar) no tiene API (P-16). Mientras tanto, el paso 2 crea la llave por configuración del servidor.
+- Asignar los roles distintos de `alumno` no está especificado (P-18). Mientras tanto, el paso 3 los carga a mano para la institución sintética.
 
 ### Avance para el radar
 
@@ -428,14 +437,13 @@ El radar dibuja, en el eje «Constancias y verificación», el **nivel declarado
 avance = pasos del siguiente nivel terminados ÷ pasos del siguiente nivel
 ```
 
-- Un paso está **terminado** cuando pasan todas las pruebas de su fila en la ruta.
-- Pasos de cada nivel: nivel 1 = pasos 1 a 3; nivel 2 = pasos 4 a 6; nivel 3 = pasos 7 y 8.
+- Un paso está **terminado** cuando pasan todas las pruebas de su fila en la ruta. El paso 3 (ESC-19) no tiene pruebas en su fila: está terminado cuando pasa C-59.
+- Pasos de cada nivel: nivel 1 = pasos 1 y 2; nivel 2 = pasos 3 a 6; nivel 3 = pasos 7 y 8.
 - **Ejemplo:** un plantel en nivel 2 con el paso 7 terminado y el 8 no está en nivel 2 con avance de 1 ÷ 2 = 50 % hacia el 3.
-- Mientras P-20 siga abierto, los pasos 2 y 3 no tienen prueba propia: su avance se reporta **«sin medir»**, no como 0 % ni como 100 %.
 
 El avance no cambia el nivel declarado: un plantel sigue en nivel 2 hasta terminar todos los pasos del nivel 3.
 
-## Fuera de v0.3 y preguntas abiertas
+## Fuera de v0.4 y preguntas abiertas
 
 ### No incluido en esta versión
 
@@ -459,6 +467,6 @@ La especificación asume que `Alumno` incluye al menos: matrícula, nombre, CURP
 ### Preguntas abiertas
 
 1. **Sin contacto en padrón:** ¿cómo se comunica el código a un alumno cuyo padrón no tiene correo ni teléfono? Hoy: activación presencial (C-30). ¿Se necesita un canal adicional?
-2. **Migración de ESC-61 a ESP-IDP:** las pruebas C-26–C-30, C-48–C-50, C-52 y C-57 viven temporalmente en ESP-CON. Cuando ESP-IDP v0.3 incluya formalmente ESC-61, se mueven allá y aquí queda sólo la referencia cruzada.
+2. **Migración de ESC-61 a ESP-IDP:** las pruebas C-26–C-30, C-48–C-50, C-52 y C-57 viven temporalmente en ESP-CON. Cuando ESP-IDP v0.3 incluya formalmente ESC-61, se mueven allá y aquí queda sólo la referencia cruzada. Lo mismo vale para C-58 (ESC-63) y C-59 (ESC-19).
 3. **Rotación de clave de firma:** ¿qué pasa con constancias ya emitidas si se rota el par `constancia-*`? Resuelto en ADR-008 y precisado en ADR-0011: rotar deja la llave anterior publicada para verificar hasta que venza lo último que firmó; retirarla es quitarla después de eso; revocarla (robo) la quita de inmediato. Todas llevan `use: "sig"`, porque `verify-only` no es un valor válido de `use` en RFC 7517.
 4. **Formato del PDF:** ADR-008 fija PDF/A-2b, la JWS adjunta y el QR; esta versión no prescribe márgenes, tipografía ni logotipo; eso queda como configuración de plantilla. Puede requerir un ADR si la SEP establece un formato oficial.

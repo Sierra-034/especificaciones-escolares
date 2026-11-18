@@ -2,6 +2,18 @@
 
 Formato: una sección por etiqueta publicada.
 
+## esp-con-v0.4.0 — 2026-11-17
+
+Versión menor: cambia qué pruebas pide cada nivel del criterio de adopción. No cambia lo que hace una implementación.
+
+- #18 Separar el criterio de adopción de ESP-CON de la puerta (ESP-CON 0.4):
+  - ADR-0013: las pruebas de un nivel solo usan historias de ese nivel o de los anteriores; una especificación pide de otro subsistema solo las historias que usa.
+  - El criterio de ESP-CON ya no pide C-01 a C-07, C-19, C-20 ni C-24 (credencial y puerta). De Identidad solo pide C-18, en su parte del servidor.
+  - Nivel 1 = ESC-44 y ESC-63. ESC-19 pasa al nivel 2.
+  - Pruebas nuevas C-58 (llaves publicadas), C-59 (el rol `alumno` no puede activar) y C-60 (lo emitido con una versión anterior de la plantilla sigue válido). C-32 ya no comprueba la verificación; C-33 cita también ESC-05.
+  - Ruta de implementación: ESC-63 es el paso 2 y ESC-19 el 3.
+  - Resuelve P-20 (#15).
+
 ## esp-con-v0.3.1 — 2026-11-17
 
 Corrección: no cambia comportamiento ni pruebas.

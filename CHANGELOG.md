@@ -2,6 +2,16 @@
 
 Formato: una sección por etiqueta publicada.
 
+## esp-con-v0.3.1 — 2026-11-17
+
+Corrección: no cambia comportamiento ni pruebas.
+
+- #14 Agregar la guía de adopción a ESP-CON (ESP-CON 0.3.1):
+  - Nueva sección «Guía de adopción»: dependencias entre las 8 historias, criterio de adopción (escuelas, sin cambios), ruta de implementación (desarrolladores, 8 pasos con sus pruebas) y avance para el radar.
+  - ESC-61 también depende de ESC-19.
+  - El plan de constancias del catálogo de historias apunta a la guía (una sola fuente).
+  - Pendientes nuevos P-20 (#15) y P-21 (#16).
+
 ## esp-con-v0.3.0 · esp-idp-v0.2.0 · esp-pla-v0.2.0 — 2026-11-13
 
 Tres etiquetas sobre el mismo commit.

@@ -1,11 +1,13 @@
 ---
 id: ESP-CON
-version: 0.3.0
+version: 0.3.1
 estado: borrador
 ---
 # ESP-CON · Constancias y verificación (v0.3)
 
 > Migrado el 2026-11-13 desde [Especificación v0.2: constancias y verificación (ESP-CON)](https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv) (fecha del original: 2026-11-12). Texto copiado sin cambios; la fuente de verdad desde ahora es este archivo.
+
+**Versión 0.3.1 (2026-11-17).** Agrega la [Guía de adopción](#guia-de-adopcion): separa el **criterio de adopción** (qué declara una escuela) de la **ruta de implementación** (en qué orden se construye y qué se prueba en cada paso), con las dependencias entre historias y cómo se mide el avance para el radar. Corrige la dependencia de ESC-61, que también depende de ESC-19. No cambia comportamiento ni pruebas.
 
 **Versión 0.3 (2026-11-13).** Corrige las incongruencias de la [revisión para el contrato OpenAPI](https://claude.ai/artifact/Q3p2bdLkLhM34DU9qTHkkL): el alumno pide su código con la matrícula; `GET /v0/verificar/{folio}` responde con `resultado`; los roles y el token de sesión salen del catálogo único de ESP-IDP (ADR-0012); rotar, retirar y revocar una llave son tres cosas distintas (ADR-0011); el JWKS vive en `GET /v0/llaves` (ADR-0010). Aclara versiones de plantilla, permisos de lectura, límites, anulación repetida y activación presencial. Agrega C-51 a C-57. Lo que se dejó fuera está en [Pendientes conocidos](pendientes.md).
 
@@ -333,23 +335,105 @@ Las pruebas C-26 a C-57 cubren este subsistema. Las pruebas C-01 a C-25 pertenec
 
 > Las pruebas de integración DEBEN usar un servidor local con estas claves de prueba; nunca apuntar a un plantel real.
 
-## Criterio de adopción
+## Guía de adopción
 
-Cada nivel es un **conjunto cerrado bajo “depende de”**. El nivel 2 es el mínimo para declarar adopción del subsistema en el radar.
+Esta sección responde dos preguntas distintas que antes estaban juntas:
+
+| Pregunta | Para quién | Dónde | ¿Obliga? |
+| --- | --- | --- | --- |
+| ¿Qué nivel puede declarar mi escuela y qué tiene que pasar para declararlo? | Escuelas | [Criterio de adopción](#criterio-de-adopcion) | Sí: es la regla para declararse en un nivel. |
+| ¿En qué orden construyo las historias y qué pruebo al terminar cada una? | Desarrolladores | [Ruta de implementación](#ruta-de-implementacion) | No: es una guía. No agrega obligaciones a una implementación. |
+
+Las dos salen del mismo grafo: el campo `depende_de` de cada historia en `docs/historias/`. Si el grafo cambia, cambian las dos en el mismo PCE.
+
+### Dependencias entre historias
+
+Solo dependencias directas, como en el catálogo. Una flecha `A ──► B` se lee «B depende de A».
+
+```text
+ESC-44 ──────────► ESC-61 ──┐
+                      ▲     │
+ESC-19 ───────┬───────┘     ├──► ESC-05 ──► ESC-07 ──► ESC-62
+              └──► ESC-08 ──┤
+ESC-63 ─────────────────────┘
+```
+
+| Historia | Subsistema dueño | Depende de | Por qué |
+| --- | --- | --- | --- |
+| [ESC-44](../historias/ESC-44.md) · Importar el padrón | Identidad | — | Es la fuente de los alumnos y de sus datos. |
+| [ESC-19](../historias/ESC-19.md) · Acceso por rol | Identidad | — | Da los roles `alumno` y `control_escolar` del token de sesión. |
+| [ESC-63](../historias/ESC-63.md) · Llaves de firma | Identidad | — | Da la llave `constancia-*` y su publicación en `GET /v0/llaves`. |
+| [ESC-61](../historias/ESC-61.md) · Entrar con código | Identidad | ESC-44, ESC-19 | Solo entra quien está en el padrón. La activación presencial pide el rol `control_escolar` (C-30, C-57) y el token lleva roles. |
+| [ESC-08](../historias/ESC-08.md) · Plantillas con vigencia | Constancias | ESC-19 | Crear y versionar plantillas pide el rol `control_escolar`. |
+| [ESC-05](../historias/ESC-05.md) · Constancia en autoservicio | Constancias | ESC-08, ESC-61, ESC-63 | Emitir pide sesión (ESC-61), una plantilla vigente (ESC-08) y una llave para firmar (ESC-63). |
+| [ESC-07](../historias/ESC-07.md) · Verificar por QR | Constancias | ESC-05 | Solo se verifica lo que ya se emitió. |
+| [ESC-62](../historias/ESC-62.md) · Anular | Constancias | ESC-07 | Su criterio «al verificarla aparece como anulada» se comprueba con `/verificar` (C-44). |
+
+ESC-44, ESC-19, ESC-61 y ESC-63 son de Identidad: ESP-CON las exige, no es su dueña.
+
+### Criterio de adopción
+
+**Para escuelas.** Cada nivel es un **conjunto cerrado bajo “depende de”**. El nivel 2 es el mínimo para declarar adopción del subsistema en el radar.
 
 | Nivel | Nombre | Historias requeridas | Pruebas que DEBEN pasar |
 | --- | --- | --- | --- |
 | 0 | Sin sistema | — | — |
 | 1 | Base | ESC-44, ESC-19, ESC-63 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP) |
-| 2 | Adopción mínima | Nivel 1 + ESC-61, ESC-08, ESC-05 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-37, C-45, C-48..C-52, C-57 |
-| 3 | Adopción plena | Nivel 2 + ESC-07, ESC-62 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-57 |
+| 2 | Adopción mínima | Nivel 1 + ESC-61, ESC-08, ESC-05 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-37, C-45, C-48..C-52, C-57 |
+| 3 | Adopción plena | Nivel 2 + ESC-07, ESC-62 | C-01..C-07, C-18, C-19, C-20, C-24 (ESP-IDP), C-26..C-57 |
 | 4 | *(no definido todavía)* | — | — |
 
-**Cobertura:** se mide como `historias implementadas ÷ historias del nivel × 100 %`. Un plantel declara el nivel más alto cuyo conjunto completo de historias está implementado y cuyas pruebas pasan.
+Un plantel declara el nivel más alto cuyo conjunto completo de historias está implementado y cuyas pruebas pasan.
 
-**El demo de referencia alcanza nivel 3** con una institución sintética de \~800 alumnos, una plantilla «constancia de estudios» y una clave de firma Ed25519 local.
+!!! note "Pruebas de ESP-IDP que este subsistema no puede correr solo"
+    C-01 a C-07, C-19, C-20 y C-24 usan la credencial y el registro de entradas (ESC-29, ESC-38, ESC-45, ESC-46 y la puerta de ESP-PLA), que no están en ningún nivel de esta tabla. Una escuela que adopta solo constancias no puede pasarlas. Se resuelve en un PCE aparte: ver P-20 en [Pendientes conocidos](pendientes.md).
 
-> El radar de adopción usa el nivel alcanzado (0–4) como valor del eje «Constancias y verificación». El radar se describe en el [índice de especificaciones](index.md).
+**El demo de referencia alcanza nivel 3** con una institución sintética de \~800 alumnos, una plantilla «constancia de estudios» y una clave de firma Ed25519 local.
+
+> El radar de adopción usa el nivel alcanzado (0–4) como valor del eje «Constancias y verificación». El avance hacia el siguiente nivel se mide con la ruta de implementación: ver [Avance para el radar](#avance-para-el-radar). El radar se describe en el [índice de especificaciones](index.md).
+
+### Ruta de implementación
+
+**Para desarrolladores. Es una guía:** no cambia lo que una implementación DEBE hacer; eso lo dicen las secciones de arriba y las pruebas.
+
+La ruta se lee de arriba abajo. Las historias de una misma **etapa** no dependen entre sí: se pueden hacer en cualquier orden o al mismo tiempo. Una historia empieza cuando las historias de las que depende ya pasan sus pruebas.
+
+Cada prueba aparece en el **primer paso en que existen todas las rutas que usa**, aunque cite otra historia. Por eso C-33 (cita ESC-08) se corre en el paso de ESC-05, que es quien expone `POST /v0/constancias`.
+
+| Etapa | Paso | Historia | Depende de | Pruebas que se corren al terminar el paso | Completa el nivel | Qué se tiene al terminar |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 1 | ESC-44 | — | C-18 | — | Padrón de la institución sintética cargado, con los textos en NFC. |
+| 0 | 2 | ESC-19 | — | Ninguna propia todavía (C-19 usa el registro de entradas; C-51 va en el paso 6). Ver P-20. | — | Token de sesión con `roles`; 403 `sin-permiso` si falta el rol. |
+| 0 | 3 | ESC-63 | — | Ninguna propia todavía (C-47 y C-55 van en el paso 7). Ver P-16 y P-20. | 1 | Llave `constancia-*` publicada en `GET /v0/llaves`. |
+| 1 | 4 | ESC-61 | ESC-44, ESC-19 | C-26..C-30, C-48..C-50, C-52, C-57 | — | El alumno entra con código; el adaptador `buzon_simulado` del Notificador basta para el demo. |
+| 1 | 5 | ESC-08 | ESC-19 | C-31; C-32 hasta «la 1 queda `activa: false`» | — | Plantilla «constancia de estudios» versionada. |
+| 2 | 6 | ESC-05 | ESC-08, ESC-61, ESC-63 | C-33..C-37, C-45, C-51 | 2 | El alumno descarga su constancia en PDF/A-2b, firmada, con folio y QR. |
+| 3 | 7 | ESC-07 | ESC-05 | C-38..C-42, C-46, C-47, C-53, C-55, C-56; C-32 completa | — | Cualquiera verifica una constancia abriendo su QR. |
+| 4 | 8 | ESC-62 | ESC-07 | C-43, C-44, C-54 | 3 | Control escolar anula una constancia y la verificación lo muestra. |
+
+**Camino crítico:** cinco pasos, por ejemplo ESC-44 → ESC-61 → ESC-05 → ESC-07 → ESC-62. Ninguna implementación puede llegar al nivel 3 en menos pasos seguidos, aunque tenga más personas: lo que sí se reparte son las etapas 0 y 1.
+
+**Una sola persona** puede seguir los pasos en orden, del 1 al 8.
+
+**Lo que la ruta necesita y la especificación todavía no define:**
+
+- Administrar llaves (generar, rotar, retirar, revocar) no tiene API (P-16). Mientras tanto, el paso 3 crea la llave por configuración del servidor.
+- Asignar los roles distintos de `alumno` no está especificado (P-18). Mientras tanto, el paso 2 los carga a mano para la institución sintética.
+
+### Avance para el radar
+
+El radar dibuja, en el eje «Constancias y verificación», el **nivel declarado** (0–4) del criterio de adopción. La ruta agrega el **avance hacia el siguiente nivel**:
+
+```text
+avance = pasos del siguiente nivel terminados ÷ pasos del siguiente nivel
+```
+
+- Un paso está **terminado** cuando pasan todas las pruebas de su fila en la ruta.
+- Pasos de cada nivel: nivel 1 = pasos 1 a 3; nivel 2 = pasos 4 a 6; nivel 3 = pasos 7 y 8.
+- **Ejemplo:** un plantel en nivel 2 con el paso 7 terminado y el 8 no está en nivel 2 con avance de 1 ÷ 2 = 50 % hacia el 3.
+- Mientras P-20 siga abierto, los pasos 2 y 3 no tienen prueba propia: su avance se reporta **«sin medir»**, no como 0 % ni como 100 %.
+
+El avance no cambia el nivel declarado: un plantel sigue en nivel 2 hasta terminar todos los pasos del nivel 3.
 
 ## Fuera de v0.3 y preguntas abiertas
 

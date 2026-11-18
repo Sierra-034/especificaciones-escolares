@@ -78,16 +78,9 @@ Los 11 subsistemas salen de agrupar las 80 historias de Sistema educativo. La mi
 
 Es el MVP elegido (2026-11-12). Su especificación es [ESP-CON](../especificaciones/ESP-CON.md).
 
-| Adopción | Construcción | ID | Historia corta | Subsistema | Depende de |
-| --- | --- | --- | --- | --- | --- |
-| 2 | 0 | [ESC-44](ESC-44.md) | Importar el padrón | Plataforma | — |
-| 2 | 0 | [ESC-19](ESC-19.md) | Acceso por rol (mínima) | Plataforma | — |
-| 2 | 0 | [ESC-63](ESC-63.md) | Llaves de firma de la escuela | Plataforma | — |
-| 2 | 1 | [ESC-61](ESC-61.md) | Identificarse con un código | Plataforma | [ESC-44](ESC-44.md) |
-| 2 | 1 | [ESC-08](ESC-08.md) | Plantillas oficiales con vigencia | Constancias | [ESC-19](ESC-19.md) |
-| 2 | 2 | [ESC-05](ESC-05.md) | Constancia de estudios en autoservicio | Constancias | [ESC-08](ESC-08.md), [ESC-61](ESC-61.md), [ESC-63](ESC-63.md) |
-| 3 | 3 | [ESC-07](ESC-07.md) | Verificar una constancia por QR | Constancias | [ESC-05](ESC-05.md) |
-| 3 | 4 | [ESC-62](ESC-62.md) | Anular una constancia | Constancias | [ESC-07](ESC-07.md) |
+El plan vive en la [Guía de adopción de ESP-CON](../especificaciones/ESP-CON.md#guia-de-adopcion), para no tener dos copias que se contradigan (principio 14). Ahí están las dependencias entre las 8 historias, el criterio de adopción por nivel y la ruta de implementación paso a paso, con las pruebas que se corren al terminar cada paso.
+
+Orden para una sola persona: [ESC-44](ESC-44.md), [ESC-19](ESC-19.md), [ESC-63](ESC-63.md), [ESC-61](ESC-61.md), [ESC-08](ESC-08.md), [ESC-05](ESC-05.md), [ESC-07](ESC-07.md), [ESC-62](ESC-62.md).
 
 ## MVP de puerta: plan de construcción
 
@@ -146,7 +139,7 @@ Es la base: quién es cada persona, cómo lo demuestra y qué puede hacer dentro
 | [ESC-45](ESC-45.md) | Emitir la credencial | [ESC-44](ESC-44.md), [ESC-63](ESC-63.md) | C-24 |
 | [ESC-46](ESC-46.md) | Revocar una credencial | [ESC-45](ESC-45.md) | C-07 |
 | [UNI-14](UNI-14.md) | Inicio de sesión único | [ESC-61](ESC-61.md) | — |
-| [ESC-61](ESC-61.md) | Identificarse con un código, sin contraseña | [ESC-44](ESC-44.md) | C-26 a C-30, C-48 a C-50 |
+| [ESC-61](ESC-61.md) | Identificarse con un código, sin contraseña | [ESC-44](ESC-44.md), [ESC-19](ESC-19.md) | C-26 a C-30, C-48 a C-50 |
 | [ESC-63](ESC-63.md) | Llaves de firma de la escuela | — | C-03, C-47 |
 
 ## Acceso al plantel

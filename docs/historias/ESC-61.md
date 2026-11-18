@@ -3,7 +3,7 @@ id: ESC-61
 titulo: Identificarse con un código, sin contraseña
 subsistema: identidad
 estado: propuesta
-depende_de: [ESC-44]
+depende_de: [ESC-44, ESC-19]
 ---
 
 # ESC-61 · Identificarse con un código, sin contraseña
@@ -24,7 +24,7 @@ Como **alumno o persona del personal**, quiero **entrar a la plataforma con un c
 ## Relaciones
 
 - **Subsistema dueño:** Identidad y acceso a la plataforma.
-- **Depende de:** [ESC-44](ESC-44.md).
+- **Depende de:** [ESC-44](ESC-44.md), [ESC-19](ESC-19.md). ESC-19 se agregó en ESP-CON 0.3.1: la activación presencial pide el rol `control_escolar` y el token de sesión lleva roles.
 - **Usa:** —.
 
 ## Origen

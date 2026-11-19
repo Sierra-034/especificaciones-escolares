@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 # Especificaciones escolares
 
 Estándar abierto para el software de escuelas públicas de nivel medio superior y superior.
@@ -72,4 +73,8 @@ pytest --base-url http://localhost:8000
 
 ## Licencia
 
-Pendiente de su ADR. Propuesta: CC BY 4.0 para los textos y una licencia libre para el código.
+Todo el repositorio se publica con la [GNU Affero General Public License v3.0 o posterior](LICENSE)
+(`AGPL-3.0-or-later`). Puedes usar, copiar, modificar y redistribuir el estándar; lo que redistribuyas
+o sirvas en red debe seguir con la misma licencia. Escribir una implementación propia que pase las
+pruebas no te obliga a nada; copiar archivos de aquí sí. Detalles en la
+[ADR-0014](docs/adr/0014-licencia-agpl.md).

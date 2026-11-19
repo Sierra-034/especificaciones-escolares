@@ -14,12 +14,13 @@ a esa implementación (lenguaje, framework) viven allá.
 | 0006 | App multiplataforma con React Native | propuesta | plataforma-escolar |
 | 0007 | Servidor y simulador en Python con FastAPI | aceptada | plataforma-escolar |
 | [0008](0008-formato-de-constancia.md) | El JWS es la constancia; PDF y QR son el medio | aceptada | aquí |
-| [0009](0009-entrega-de-codigo.md) | Código de 6 dígitos para entrar | aceptada | aquí |
+| [0009](0009-entrega-de-codigo.md) | Código de 6 dígitos para entrar | aceptada; su punto 4 lo reemplaza 0015 | aquí |
 | [0010](0010-ruta-del-jwks.md) | Las llaves públicas se publican en `GET /v0/llaves` | aceptada | aquí |
 | [0011](0011-rotar-retirar-revocar-llaves.md) | Rotar, retirar y revocar una llave son tres cosas distintas | aceptada | aquí |
 | [0012](0012-catalogo-de-roles.md) | Un solo catálogo de roles y un token de sesión definido | aceptada | aquí |
 | [0013](0013-pruebas-de-cada-nivel.md) | Las pruebas de un nivel solo usan historias de ese nivel o de los anteriores | aceptada | aquí |
 | [0014](0014-licencia-agpl.md) | El estándar se publica con la licencia AGPL-3.0 | aceptada | aquí |
+| [0015](0015-codigo-sin-contacto-en-respuesta.md) | Pedir un código responde un mensaje genérico, sin el contacto (reemplaza el punto 4 de 0009) | aceptada | aquí |
 
 Migradas el 2026-11-13 desde [Diseño del MVP](https://claude.ai/artifact/8z2qFXRnnrty1u4cJAGH4R) (0001–0007) y
 [Decisiones de diseño: MVP de constancias](https://claude.ai/artifact/BFv1HemHiY2yqZoTx7jqoc) (0008–0009).

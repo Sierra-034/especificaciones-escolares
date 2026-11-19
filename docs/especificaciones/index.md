@@ -8,7 +8,7 @@
 |---|---|---|
 | ESP-IDP | [ESP-IDP.md](ESP-IDP.md) (el texto v0.1 vive por ahora en ESP-PLA.md) | 0.2 |
 | ESP-PLA | [ESP-PLA.md](ESP-PLA.md) | 0.2 |
-| ESP-CON | [ESP-CON.md](ESP-CON.md) | 0.3 |
+| ESP-CON | [ESP-CON.md](ESP-CON.md) | 0.5 |
 
 Lo que se encontró y todavía no se resuelve está en [Pendientes conocidos](pendientes.md).
 
@@ -38,7 +38,7 @@ Reglas básicas:
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | ESP-IDP | [Identidad y acceso a la plataforma](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ) | Identidad y acceso a la plataforma (la base) | 0.2 | Borrador | Samuel Gómez | ESC-19, 38, 44, 45, 46 | C-01 a C-07, C-18, C-19, C-20, C-24 |
 | ESP-PLA | [Acceso al plantel](https://claude.ai/artifact/7T3STEZ5im4PVvaH1LJSBQ) | Acceso al plantel | 0.2 | Borrador | Samuel Gómez | ESC-29, 39 a 43, 47, 48 | C-08 a C-17, C-21 a C-23, C-25 |
-| ESP-CON | [Constancias y verificación](https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv) | Constancias y verificación | 0.4 | Borrador | Samuel Gómez | ESC-05, 07, 08, 19, 44, 61, 62, 63 | C-26 a C-60 |
+| ESP-CON | [Constancias y verificación](https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv) | Constancias y verificación | 0.5 | Borrador | Samuel Gómez | ESC-05, 07, 08, 19, 44, 61, 62, 63 | C-26 a C-60 |
 | ESP-COM | Convenciones comunes | Todos | — | Por separar | Samuel Gómez | — | — |
 
 ESP-IDP y ESP-PLA viven por ahora en un mismo documento, «Especificación v0.1», y se separan al pasar al repositorio. Antes se llamaban juntas ESP-ACC. ESP-CON tiene documento propio.

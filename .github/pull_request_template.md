@@ -12,3 +12,4 @@
 - [ ] Si cambia el comportamiento, cambié la prueba de conformidad y el vector.
 - [ ] `python herramientas/verificar_catalogo.py` pasa.
 - [ ] `mkdocs build --strict` pasa.
+- [ ] Si cambia el contrato: `openapi-spec-validator contratos/openapi.yaml` pasa.

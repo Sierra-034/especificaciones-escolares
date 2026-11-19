@@ -1,29 +1,903 @@
 openapi: 3.1.0
 info:
   title: Especificaciones escolares
-  version: 0.2.0
+  version: 0.3.0
+  summary: Contrato HTTP del estándar escolar. Hoy cubre el MVP de constancias (ESP-CON 0.5).
   description: |
-    Contrato HTTP del estándar. Esqueleto inicial: faltan esquemas y errores,
-    por migrar desde ESP-CON v0.3 y ESP-IDP 0.2.
+    Contrato HTTP del estándar. Las implementaciones se prueban contra este archivo, no al revés
+    (principio 12). Si este archivo y el texto de una especificación no coinciden, es un error del
+    estándar: repórtalo como pendiente (`docs/especificaciones/pendientes.md`).
+
+    **Versiones (resuelve P-17).** `info.version` es la versión de este contrato y sube cada vez que
+    cambia una ruta, un esquema o un error. Cada operación dice de qué especificación sale, con qué
+    versión y qué historias y pruebas cubre:
+
+    - `x-especificacion`: especificación dueña de la ruta, como `ESP-CON@0.5`.
+    - `x-historias`: historias que la ruta atiende.
+    - `x-pruebas`: pruebas de conformidad que llaman a la ruta.
+    - `x-roles`: roles del [catálogo de ESP-IDP](https://Sierra-034.github.io/especificaciones-escolares/especificaciones/ESP-IDP/#catalogo-de-roles)
+      que la ruta acepta. Si el token no trae ninguno, la ruta responde 403 `sin-permiso`.
+      Sin `x-roles`, cualquier sesión válida basta.
+
+    **Qué cubre hoy.** Las 12 operaciones de ESP-CON y `GET /v0/llaves` de ESP-IDP. Las pruebas C-41,
+    C-42 y C-55 no llaman a una ruta nueva: comprueban lo que hace la página de verificación con las
+    respuestas de `/v0/verificar/{folio}` y `/v0/llaves`. Importar el padrón (ESC-44) todavía no
+    está en el contrato: ver P-22.
+
+    **Errores.** Todo error es Problem Details (RFC 9457) con `type` bajo
+    `https://especificacion.example/errores/`. El dominio es provisional.
+  license:
+    name: AGPL-3.0-or-later
+    identifier: AGPL-3.0-or-later
+servers:
+  - url: https://{plantel}
+    description: Servidor de un plantel. Todas las rutas llevan el prefijo /v0.
+    variables:
+      plantel:
+        default: plantel.especificacion.example
+        description: Dominio del plantel.
+tags:
+  - name: auth
+    description: Entrar con código, sin contraseña (ESC-61).
+  - name: plantillas
+    description: Plantillas de constancia con vigencia y versión (ESC-08).
+  - name: constancias
+    description: Emitir, descargar y anular constancias (ESC-05, ESC-62).
+  - name: verificacion
+    description: Rutas públicas, sin cuenta (ESC-07, ESC-63).
+
+security:
+  - sesion: []
+
 paths:
   /v0/auth/codigo:
     post:
-      summary: Pedir un código de un solo uso (ESC-61, ADR-0009)
+      tags: [auth]
+      operationId: pedirCodigo
+      summary: Pedir un código de un solo uso
+      description: |
+        El servidor genera un código de 6 dígitos, guarda su HMAC y lo envía al contacto registrado
+        por el puerto Notificador (ADR-0009). Pedir un código nuevo invalida el anterior.
+
+        Responde **siempre 202 con el mismo cuerpo**, exista o no la matrícula, para que nadie pueda
+        sondear el padrón (ADR-0015). Límites: 3 solicitudes por matrícula cada 15 minutos y 20 por
+        IP cada hora.
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-61]
+      x-pruebas: [C-26, C-48, C-49]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SolicitudCodigo" }
       responses:
-        "202": { description: Siempre 202, exista o no el contacto en el padrón. }
-        "429": { description: demasiadas-solicitudes }
-  /v0/verificar/{folio}:
+        "202":
+          description: Solicitud recibida. El cuerpo no dice si la matrícula existe.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CodigoSolicitado" }
+        "400": { $ref: "#/components/responses/SolicitudInvalida" }
+        "429": { $ref: "#/components/responses/DemasiadasSolicitudes" }
+
+  /v0/auth/sesion:
+    post:
+      tags: [auth]
+      operationId: abrirSesion
+      summary: Canjear el código por un token de sesión
+      description: |
+        El código vence a los 10 minutos (configurable). Al tercer intento fallido con el mismo
+        código, el código queda invalidado. Una matrícula que no está en el padrón responde 401
+        `codigo-invalido` con el mismo cuerpo que un código incorrecto (C-52). Cada inicio de
+        sesión queda anotado con quién y cuándo.
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-61]
+      x-pruebas: [C-27, C-28, C-29, C-50, C-52]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CanjeCodigo" }
+      responses:
+        "200":
+          description: Sesión abierta.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Sesion" }
+        "400": { $ref: "#/components/responses/SolicitudInvalida" }
+        "401":
+          description: "`codigo-expirado` o `codigo-invalido`."
+          content:
+            application/problem+json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Problema"
+                  - properties:
+                      type:
+                        enum:
+                          - https://especificacion.example/errores/codigo-expirado
+                          - https://especificacion.example/errores/codigo-invalido
+                      status: { const: 401 }
+              examples:
+                codigo-expirado:
+                  value:
+                    type: https://especificacion.example/errores/codigo-expirado
+                    title: El código ha expirado
+                    status: 401
+                    detail: El código venció a las 2026-11-12T04:00:00Z.
+                codigo-invalido:
+                  value:
+                    type: https://especificacion.example/errores/codigo-invalido
+                    title: El código no es correcto
+                    status: 401
+        "429":
+          description: "`codigo-bloqueado`: tercer intento fallido; hay que pedir un código nuevo."
+          content:
+            application/problem+json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Problema"
+                  - properties:
+                      type: { const: https://especificacion.example/errores/codigo-bloqueado }
+                      status: { const: 429 }
+
+  /v0/auth/activacion:
+    post:
+      tags: [auth]
+      operationId: registrarContacto
+      summary: Registrar en persona el contacto de un alumno
+      description: |
+        Control escolar registra (o cambia) el contacto de un alumno que se presentó en persona.
+        Desde ese momento el alumno entra con el flujo normal; no hay un código de activación aparte.
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-61, ESC-19]
+      x-pruebas: [C-30, C-57, C-59]
+      x-roles: [control_escolar]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Activacion" }
+      responses:
+        "200":
+          description: Contacto registrado.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ContactoRegistrado" }
+        "400": { $ref: "#/components/responses/SolicitudInvalida" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "403": { $ref: "#/components/responses/SinPermiso" }
+        "404":
+          description: "`no-en-padron`: la matrícula no existe en el padrón."
+          content:
+            application/problem+json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Problema"
+                  - properties:
+                      type: { const: https://especificacion.example/errores/no-en-padron }
+                      status: { const: 404 }
+
+  /v0/plantillas:
     get:
-      summary: Verificar una constancia por folio, sin cuenta (ESC-07, ADR-0008)
-      parameters:
-        - { name: folio, in: path, required: true, schema: { type: string } }
+      tags: [plantillas]
+      operationId: listarPlantillas
+      summary: Listar las plantillas activas y vigentes
+      description: Solo la versión activa de cada `id`, y solo si está vigente hoy.
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-08]
+      x-pruebas: [C-31]
       responses:
-        "200": { description: "resultado valida o vencida, con la JWS y los datos visibles." }
-        "404": { description: folio-no-encontrado }
-        "410": { description: "constancia-anulada, con resultado anulada y los datos visibles." }
-        "429": { description: demasiadas-solicitudes }
+        "200":
+          description: Plantillas activas y vigentes.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ListaPlantillas" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+    post:
+      tags: [plantillas]
+      operationId: crearPlantilla
+      summary: Crear una plantilla nueva, en su versión 1
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-08, ESC-19]
+      x-pruebas: [C-32]
+      x-roles: [control_escolar]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NuevaPlantilla" }
+      responses:
+        "201":
+          description: Plantilla creada en su versión 1, activa.
+          headers:
+            Location:
+              description: "`/v0/plantillas/{id}`"
+              schema: { type: string }
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Plantilla" }
+        "400": { $ref: "#/components/responses/SolicitudInvalida" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "403": { $ref: "#/components/responses/SinPermiso" }
+        "409":
+          description: "`plantilla-ya-existe`: ese `id` ya existe; para una versión nueva usa `PUT /v0/plantillas/{id}`."
+          content:
+            application/problem+json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Problema"
+                  - properties:
+                      type: { const: https://especificacion.example/errores/plantilla-ya-existe }
+                      status: { const: 409 }
+
+  /v0/plantillas/{id}:
+    parameters:
+      - $ref: "#/components/parameters/PlantillaId"
+    get:
+      tags: [plantillas]
+      operationId: obtenerPlantilla
+      summary: Obtener la versión activa de una plantilla
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-08]
+      x-pruebas: [C-32]
+      responses:
+        "200":
+          description: Versión activa.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Plantilla" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "404": { $ref: "#/components/responses/PlantillaNoEncontrada" }
+    put:
+      tags: [plantillas]
+      operationId: versionarPlantilla
+      summary: Crear la versión siguiente de una plantilla
+      description: |
+        Crea la versión `n + 1` y, en la misma transacción, deja la `n` con `activa: false`. Solo hay
+        una versión activa por `id`. Lo ya emitido con la versión anterior sigue siendo válido (C-60).
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-08, ESC-19]
+      x-pruebas: [C-32, C-60]
+      x-roles: [control_escolar]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CambioPlantilla" }
+      responses:
+        "200":
+          description: Versión nueva, activa.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Plantilla" }
+        "400": { $ref: "#/components/responses/SolicitudInvalida" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "403": { $ref: "#/components/responses/SinPermiso" }
+        "404": { $ref: "#/components/responses/PlantillaNoEncontrada" }
+
+  /v0/constancias:
+    post:
+      tags: [constancias]
+      operationId: emitirConstancia
+      summary: Emitir una constancia en autoservicio
+      description: |
+        El `sub` del alumno sale del token; los datos salen del padrón, nunca de la solicitud. Usa
+        siempre la versión activa de la plantilla. El servidor DEBE responder en menos de 60 segundos
+        (objetivo: menos de 5).
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-05, ESC-08]
+      x-pruebas: [C-33, C-34, C-37]
+      x-roles: [alumno]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SolicitudConstancia" }
+      responses:
+        "201":
+          description: Constancia emitida.
+          headers:
+            Location:
+              description: "`/v0/constancias/{folio}`"
+              schema: { type: string }
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConstanciaEmitida" }
+        "400": { $ref: "#/components/responses/SolicitudInvalida" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "403":
+          description: "`no-inscrito` (el alumno no está inscrito en el ciclo vigente) o `sin-permiso` (el token no trae el rol `alumno`)."
+          content:
+            application/problem+json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Problema"
+                  - properties:
+                      type:
+                        enum:
+                          - https://especificacion.example/errores/no-inscrito
+                          - https://especificacion.example/errores/sin-permiso
+                      status: { const: 403 }
+        "404": { $ref: "#/components/responses/PlantillaNoEncontrada" }
+        "422":
+          description: "`plantilla-vencida`: la plantilla ya no está vigente."
+          content:
+            application/problem+json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Problema"
+                  - properties:
+                      type: { const: https://especificacion.example/errores/plantilla-vencida }
+                      status: { const: 422 }
+
+  /v0/constancias/{folio}:
+    parameters:
+      - $ref: "#/components/parameters/Folio"
+    get:
+      tags: [constancias]
+      operationId: obtenerConstancia
+      summary: Obtener la JWS de una constancia
+      description: Solo el alumno dueño del folio (el `sub` del token es el de la constancia) o el rol `control_escolar`.
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-05, ESC-19]
+      x-pruebas: [C-35, C-51]
+      x-roles: [alumno, control_escolar]
+      responses:
+        "200":
+          description: La JWS, idéntica a la guardada.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Constancia" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "403": { $ref: "#/components/responses/SinPermiso" }
+        "404": { $ref: "#/components/responses/FolioNoEncontrado" }
+
+  /v0/constancias/{folio}/pdf:
+    parameters:
+      - $ref: "#/components/parameters/Folio"
+    get:
+      tags: [constancias]
+      operationId: descargarConstanciaPdf
+      summary: Descargar el PDF de una constancia
+      description: |
+        PDF/A-2b con los datos de la plantilla, el folio legible, el QR con la URL
+        `https://{plantel}/verificar/{folio}` y la JWS adjunta como `constancia.jws` (ADR-008).
+        Mismo permiso que `GET /v0/constancias/{folio}`.
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-05, ESC-19]
+      x-pruebas: [C-36, C-45, C-51]
+      x-roles: [alumno, control_escolar]
+      responses:
+        "200":
+          description: El PDF.
+          content:
+            application/pdf:
+              schema: { type: string, contentMediaType: application/pdf }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "403": { $ref: "#/components/responses/SinPermiso" }
+        "404": { $ref: "#/components/responses/FolioNoEncontrado" }
+
+  /v0/constancias/{folio}/anular:
+    parameters:
+      - $ref: "#/components/parameters/Folio"
+    post:
+      tags: [constancias]
+      operationId: anularConstancia
+      summary: Anular una constancia
+      description: |
+        Marca la constancia como anulada; no la borra. Es idempotente: anular un folio ya anulado
+        responde 200 con la anulación original y no cambia el motivo, quién ni cuándo (C-54).
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-62]
+      x-pruebas: [C-43, C-54]
+      x-roles: [control_escolar]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SolicitudAnulacion" }
+      responses:
+        "200":
+          description: La anulación (la nueva, o la original si ya estaba anulada).
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Anulacion" }
+        "400": { $ref: "#/components/responses/SolicitudInvalida" }
+        "401": { $ref: "#/components/responses/TokenInvalido" }
+        "403": { $ref: "#/components/responses/SinPermiso" }
+        "404": { $ref: "#/components/responses/FolioNoEncontrado" }
+
+  /v0/verificar/{folio}:
+    parameters:
+      - $ref: "#/components/parameters/Folio"
+    get:
+      tags: [verificacion]
+      operationId: verificarConstancia
+      summary: Verificar una constancia por folio, sin cuenta
+      description: |
+        Ruta pública. El servidor calcula `resultado` con lo que sabe: si el folio existe, si está
+        anulado y si `exp` ya pasó. La firma la comprueba la página con `GET /v0/llaves`.
+        Límite: 60 consultas por IP por minuto (configurable).
+      x-especificacion: ESP-CON@0.5
+      x-historias: [ESC-07, ESC-62, ESC-63]
+      x-pruebas: [C-38, C-39, C-40, C-41, C-42, C-44, C-46, C-47, C-53, C-55, C-56, C-60]
+      security: []
+      responses:
+        "200":
+          description: "`resultado` es `valida` o `vencida`."
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Verificacion" }
+              examples:
+                valida:
+                  value:
+                    resultado: valida
+                    jws: eyJhbGciOiJFZERTQSIsImtpZCI6ImNvbnN0YW5jaWEtMjAyNiJ9.eyJqdGkiOiIuLi4ifQ.ZmlybWEtZGUtZWplbXBsbw
+                    datos_visibles:
+                      nombre: Ana López Martínez
+                      plantel: Plantel de ejemplo
+                      semestre: 3
+                      grupo: A
+                      ciclo: 2026-2027
+                      emitida_en: "2026-11-12T16:00:00Z"
+                      curp_enmascarada: LOMA******MX**
+        "404": { $ref: "#/components/responses/FolioNoEncontrado" }
+        "410":
+          description: "`constancia-anulada`, con los datos visibles para que quien verifica sepa qué se anuló."
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/VerificacionAnulada" }
+        "429": { $ref: "#/components/responses/DemasiadasSolicitudes" }
+
   /v0/llaves:
     get:
-      summary: Llaves públicas del plantel en JWKS (ESC-63, ADR-0010, ADR-0011)
+      tags: [verificacion]
+      operationId: listarLlaves
+      summary: Llaves públicas del plantel (JWKS)
+      description: |
+        JWKS (RFC 7517) con las llaves que firman hoy y las rotadas que aún tienen algo vigente
+        firmado; nunca las revocadas (ADR-0011). Todas con `use: "sig"`. Cuál firma hoy no se dice.
+        Ruta pública y estable durante toda la versión mayor de la API (ADR-0010).
+      x-especificacion: ESP-IDP@0.2
+      x-historias: [ESC-63, ESC-07]
+      x-pruebas: [C-41, C-47, C-55, C-58]
+      security: []
       responses:
-        "200": { description: "Llaves que firman hoy y rotadas con algo vigente; nunca revocadas. Todas con use sig." }
+        "200":
+          description: Las llaves públicas.
+          content:
+            application/jwk-set+json:
+              schema: { $ref: "#/components/schemas/JWKS" }
+            application/json:
+              schema: { $ref: "#/components/schemas/JWKS" }
+
+components:
+  securitySchemes:
+    sesion:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Token de sesión de `POST /v0/auth/sesion`, firmado por el servidor. Su contenido está en el
+        esquema `TokenDeSesion` y en ESP-IDP. Dura 30 minutos (configurable).
+
+  parameters:
+    Folio:
+      name: folio
+      in: path
+      required: true
+      description: Folio de la constancia. UUID, opaco y globalmente único.
+      schema: { type: string, format: uuid }
+    PlantillaId:
+      name: id
+      in: path
+      required: true
+      description: "`id` de la plantilla, como `constancia-estudios`."
+      schema: { $ref: "#/components/schemas/IdPlantilla" }
+
+  responses:
+    SolicitudInvalida:
+      description: "`solicitud-invalida`: el cuerpo no cumple con el esquema (falta un campo, sobra uno o el tipo no es el correcto)."
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Problema"
+              - properties:
+                  type: { const: https://especificacion.example/errores/solicitud-invalida }
+                  status: { const: 400 }
+    TokenInvalido:
+      description: "`token-invalido`: falta el token de sesión, venció o no lo firmó este servidor."
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Problema"
+              - properties:
+                  type: { const: https://especificacion.example/errores/token-invalido }
+                  status: { const: 401 }
+    SinPermiso:
+      description: "`sin-permiso`: el token no trae un rol que la ruta acepte, o el alumno no es dueño del folio."
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Problema"
+              - properties:
+                  type: { const: https://especificacion.example/errores/sin-permiso }
+                  status: { const: 403 }
+    PlantillaNoEncontrada:
+      description: "`plantilla-no-encontrada`: el `id` de plantilla no existe."
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Problema"
+              - properties:
+                  type: { const: https://especificacion.example/errores/plantilla-no-encontrada }
+                  status: { const: 404 }
+    FolioNoEncontrado:
+      description: "`folio-no-encontrado`: el folio no existe en este plantel."
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Problema"
+              - properties:
+                  type: { const: https://especificacion.example/errores/folio-no-encontrado }
+                  status: { const: 404 }
+    DemasiadasSolicitudes:
+      description: "`demasiadas-solicitudes`: se pasó un límite de solicitudes."
+      headers:
+        Retry-After:
+          description: Segundos que conviene esperar. El servidor PUEDE mandarlo.
+          schema: { type: integer, minimum: 0 }
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Problema"
+              - properties:
+                  type: { const: https://especificacion.example/errores/demasiadas-solicitudes }
+                  status: { const: 429 }
+
+  schemas:
+    # --- Comunes -------------------------------------------------------------------------
+
+    Problema:
+      description: Problem Details (RFC 9457). `type` es una URL estable; el cliente decide con ella, no con el texto.
+      type: object
+      required: [type, title, status]
+      properties:
+        type: { type: string, format: uri }
+        title: { type: string }
+        status: { type: integer, minimum: 400, maximum: 599 }
+        detail: { type: string }
+        instance: { type: string, format: uri-reference }
+
+    Matricula:
+      description: Matrícula del alumno, la que él conoce. Nunca sale en `/verificar`.
+      type: string
+      minLength: 1
+      maxLength: 32
+
+    IdPlantilla:
+      type: string
+      pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+      maxLength: 64
+      examples: [constancia-estudios]
+
+    Rol:
+      description: Rol del catálogo único de ESP-IDP (ADR-0012).
+      type: string
+      enum: [alumno, control_escolar, direccion, responsable_sistema, personal_acceso]
+
+    # --- Auth (ESC-61) -------------------------------------------------------------------
+
+    SolicitudCodigo:
+      type: object
+      additionalProperties: false
+      required: [matricula]
+      properties:
+        matricula: { $ref: "#/components/schemas/Matricula" }
+
+    CodigoSolicitado:
+      description: |
+        Idéntico exista o no la matrícula (C-48). No trae el contacto ni nada que dependa del
+        alumno (ADR-0015).
+      type: object
+      additionalProperties: false
+      required: [mensaje]
+      properties:
+        mensaje:
+          type: string
+          examples:
+            - Si la matrícula está inscrita, enviamos un código al contacto que la escuela tiene registrado. Vence en 10 minutos.
+
+    CanjeCodigo:
+      type: object
+      additionalProperties: false
+      required: [matricula, codigo]
+      properties:
+        matricula: { $ref: "#/components/schemas/Matricula" }
+        codigo:
+          type: string
+          pattern: "^[0-9]{6}$"
+          examples: ["123456"]
+
+    Sesion:
+      type: object
+      additionalProperties: false
+      required: [token, tipo, vence_en]
+      properties:
+        token:
+          description: JWT de sesión. Su contenido es `TokenDeSesion`.
+          type: string
+        tipo:
+          description: "Cómo se manda el token, en `Authorization: Bearer {token}`."
+          const: Bearer
+        vence_en:
+          description: Igual al `exp` del token, en ISO 8601 UTC.
+          type: string
+          format: date-time
+
+    TokenDeSesion:
+      description: |
+        Claims del JWT de sesión (ESP-IDP, ADR-0012). No es un cuerpo de respuesta: describe lo
+        que trae `Sesion.token` una vez decodificado.
+      type: object
+      required: [iss, sub, roles, plantel, iat, exp, jti]
+      properties:
+        iss: { type: string, description: "Id del plantel que emite." }
+        sub: { type: string, description: "Id opaco de la persona. No es la matrícula." }
+        roles:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items: { $ref: "#/components/schemas/Rol" }
+        plantel: { type: string, description: "Plantel en el que vale la sesión." }
+        iat: { type: integer, description: "Emisión, epoch UTC." }
+        exp: { type: integer, description: "Vencimiento, epoch UTC." }
+        jti: { type: string, description: "Id único de la sesión." }
+
+    Activacion:
+      type: object
+      additionalProperties: false
+      required: [matricula, contacto]
+      properties:
+        matricula: { $ref: "#/components/schemas/Matricula" }
+        contacto:
+          description: Correo, o teléfono en formato E.164.
+          oneOf:
+            - { type: string, format: email }
+            - { type: string, pattern: "^\\+[1-9][0-9]{7,14}$" }
+
+    ContactoRegistrado:
+      type: object
+      additionalProperties: false
+      required: [matricula, contacto_enmascarado, registrado_en]
+      properties:
+        matricula: { $ref: "#/components/schemas/Matricula" }
+        contacto_enmascarado:
+          type: string
+          examples: ["a*****@c****.mx"]
+        registrado_en: { type: string, format: date-time }
+
+    # --- Plantillas (ESC-08) -------------------------------------------------------------
+
+    CampoPlantilla:
+      description: Campo del padrón que lleva la constancia.
+      type: string
+      enum: [nombre, curp, matricula, semestre, grupo, turno, ciclo]
+
+    DatosPlantilla:
+      description: Lo que se escribe de una plantilla. `version` y `activa` las pone el servidor.
+      type: object
+      required: [tipo, nombre, vigencia_inicio, vigencia_fin, campos]
+      properties:
+        tipo:
+          description: Tipo de constancia. En ESP-CON 0.5 solo existe `estudios`.
+          const: estudios
+        nombre: { type: string, minLength: 1, examples: [Constancia de estudios] }
+        vigencia_inicio: { type: string, format: date }
+        vigencia_fin: { type: string, format: date }
+        requiere_revision:
+          description: Cola de revisión previa (ESC-06), fuera del MVP. En ESP-CON 0.5 siempre `false`.
+          const: false
+          default: false
+        campos:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items: { $ref: "#/components/schemas/CampoPlantilla" }
+
+    CambioPlantilla:
+      description: Lo que se manda para crear la versión siguiente. El `id` va en la ruta.
+      allOf:
+        - $ref: "#/components/schemas/DatosPlantilla"
+      unevaluatedProperties: false
+
+    NuevaPlantilla:
+      description: Lo que se manda para crear una plantilla nueva, en su versión 1.
+      allOf:
+        - $ref: "#/components/schemas/DatosPlantilla"
+      type: object
+      required: [id]
+      properties:
+        id: { $ref: "#/components/schemas/IdPlantilla" }
+      unevaluatedProperties: false
+
+    Plantilla:
+      type: object
+      required: [id, version, tipo, nombre, vigencia_inicio, vigencia_fin, requiere_revision, activa, campos]
+      properties:
+        id: { $ref: "#/components/schemas/IdPlantilla" }
+        version: { type: integer, minimum: 1 }
+        tipo: { const: estudios }
+        nombre: { type: string }
+        vigencia_inicio: { type: string, format: date }
+        vigencia_fin: { type: string, format: date }
+        requiere_revision: { type: boolean }
+        activa: { type: boolean }
+        campos:
+          type: array
+          items: { $ref: "#/components/schemas/CampoPlantilla" }
+      examples:
+        - id: constancia-estudios
+          version: 1
+          tipo: estudios
+          nombre: Constancia de estudios
+          vigencia_inicio: "2026-08-01"
+          vigencia_fin: "2027-07-31"
+          requiere_revision: false
+          activa: true
+          campos: [nombre, curp, matricula, semestre, grupo, turno, ciclo]
+
+    ListaPlantillas:
+      type: object
+      additionalProperties: false
+      required: [plantillas]
+      properties:
+        plantillas:
+          type: array
+          items: { $ref: "#/components/schemas/Plantilla" }
+
+    # --- Constancias (ESC-05, ESC-62) ----------------------------------------------------
+
+    SolicitudConstancia:
+      type: object
+      additionalProperties: false
+      required: [plantilla_id]
+      properties:
+        plantilla_id: { $ref: "#/components/schemas/IdPlantilla" }
+
+    JWS:
+      description: |
+        JWS compacta (EdDSA). Encabezado `alg: EdDSA`, `kid: constancia-*`, `typ: constancia+jwt`.
+        Payload: `jti` (= folio), `iss`, `iat`, `exp`, `typ`, `sub`, `plantilla` (`{id}@{version}`) y
+        `datos`. La anulación nunca va dentro de la JWS.
+      type: string
+      pattern: "^[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
+
+    ConstanciaEmitida:
+      type: object
+      additionalProperties: false
+      required: [folio, jws, plantilla, emitida_en, vence_en, pdf_url, verificar_url]
+      properties:
+        folio: { type: string, format: uuid }
+        jws: { $ref: "#/components/schemas/JWS" }
+        plantilla:
+          description: "`{id}@{version}` de la plantilla usada, igual que en la JWS."
+          type: string
+          pattern: "^[a-z0-9]+(-[a-z0-9]+)*@[1-9][0-9]*$"
+          examples: [constancia-estudios@1]
+        emitida_en: { type: string, format: date-time, description: "El `iat` de la JWS." }
+        vence_en: { type: string, format: date-time, description: "El `exp` de la JWS." }
+        pdf_url:
+          description: "`/v0/constancias/{folio}/pdf`, para descargar el PDF."
+          type: string
+          format: uri-reference
+        verificar_url:
+          description: La misma URL que lleva el QR, `https://{plantel}/verificar/{folio}`.
+          type: string
+          format: uri
+
+    Constancia:
+      type: object
+      additionalProperties: false
+      required: [folio, jws]
+      properties:
+        folio: { type: string, format: uuid }
+        jws: { $ref: "#/components/schemas/JWS" }
+
+    SolicitudAnulacion:
+      type: object
+      additionalProperties: false
+      required: [motivo]
+      properties:
+        motivo: { type: string, minLength: 1, maxLength: 500 }
+
+    Anulacion:
+      type: object
+      additionalProperties: false
+      required: [folio, anulada, motivo, anulada_por, anulada_en]
+      properties:
+        folio: { type: string, format: uuid }
+        anulada: { const: true }
+        motivo: { type: string }
+        anulada_por: { type: string, description: "`sub` de quien anuló." }
+        anulada_en: { type: string, format: date-time }
+
+    # --- Verificación (ESC-07) -----------------------------------------------------------
+
+    DatosVisibles:
+      description: |
+        Lo justo para compararlo con el papel (ADR-008). NO DEBE traer la matrícula ni la CURP
+        completa (C-46); por eso no admite campos extra.
+      type: object
+      additionalProperties: false
+      required: [nombre, plantel, semestre, grupo, ciclo, emitida_en, curp_enmascarada]
+      properties:
+        nombre: { type: string, description: "Nombre completo." }
+        plantel: { type: string }
+        semestre: { type: integer, minimum: 1 }
+        grupo: { type: string }
+        ciclo: { type: string, examples: ["2026-2027"] }
+        emitida_en: { type: string, format: date-time }
+        curp_enmascarada:
+          description: Solo los 4 primeros caracteres y los 2 de la homoclave.
+          type: string
+          pattern: "^[A-Z]{4}\\*{6}[A-Z0-9]{2}\\*{2}$"
+          examples: ["LOMA******MX**"]
+
+    Verificacion:
+      type: object
+      additionalProperties: false
+      required: [resultado, jws, datos_visibles]
+      properties:
+        resultado: { type: string, enum: [valida, vencida] }
+        jws: { $ref: "#/components/schemas/JWS" }
+        datos_visibles: { $ref: "#/components/schemas/DatosVisibles" }
+
+    VerificacionAnulada:
+      description: Problem Details `constancia-anulada` con miembros de extensión (RFC 9457).
+      allOf:
+        - $ref: "#/components/schemas/Problema"
+      type: object
+      required: [resultado, jws, datos_visibles, anulada_en]
+      properties:
+        type: { const: https://especificacion.example/errores/constancia-anulada }
+        status: { const: 410 }
+        resultado: { const: anulada }
+        jws: { $ref: "#/components/schemas/JWS" }
+        datos_visibles: { $ref: "#/components/schemas/DatosVisibles" }
+        anulada_en: { type: string, format: date-time }
+
+    # --- Llaves (ESC-63) -----------------------------------------------------------------
+
+    JWK:
+      description: Llave pública Ed25519 (RFC 8037). Nunca trae la parte privada `d` (C-58).
+      type: object
+      required: [kty, crv, x, kid, use]
+      properties:
+        kty: { const: OKP }
+        crv: { const: Ed25519 }
+        x: { type: string, pattern: "^[A-Za-z0-9_-]{43}$" }
+        kid:
+          description: "`constancia-*` para constancias; `credencial-*` para credenciales (ESP-PLA)."
+          type: string
+          pattern: "^(constancia|credencial)-"
+        use: { const: sig }
+        alg: { const: EdDSA }
+      not:
+        required: [d]
+
+    JWKS:
+      type: object
+      required: [keys]
+      properties:
+        keys:
+          type: array
+          items: { $ref: "#/components/schemas/JWK" }

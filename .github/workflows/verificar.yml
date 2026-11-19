@@ -12,4 +12,5 @@ jobs:
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt
       - run: python herramientas/verificar_catalogo.py
+      - run: openapi-spec-validator contratos/openapi.yaml
       - run: mkdocs build --strict

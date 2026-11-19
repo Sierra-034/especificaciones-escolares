@@ -1,11 +1,13 @@
 ---
 id: ESP-CON
-version: 0.4.0
+version: 0.5.0
 estado: borrador
 ---
-# ESP-CON · Constancias y verificación (v0.4)
+# ESP-CON · Constancias y verificación (v0.5)
 
 > Migrado el 2026-11-13 desde [Especificación v0.2: constancias y verificación (ESP-CON)](https://claude.ai/artifact/HadS5sL44Nwt2atfCpnbQv) (fecha del original: 2026-11-12). Texto copiado sin cambios; la fuente de verdad desde ahora es este archivo.
+
+**Versión 0.5 (2026-11-19).** El [contrato OpenAPI](https://github.com/Sierra-034/especificaciones-escolares/blob/main/contratos/openapi.yaml) (`contratos/openapi.yaml`) pasa de esqueleto a contrato completo: las 12 operaciones de esta especificación y `GET /v0/llaves`, con esquemas, errores y, en cada ruta, sus historias y pruebas. Resuelve P-06 (cuerpos de las respuestas) y P-17 (versiones del contrato). Pedir un código responde un mensaje genérico, sin el contacto ([ADR-0015](../adr/0015-codigo-sin-contacto-en-respuesta.md)); C-26 cambia. Emitir una constancia pide el rol `alumno`. Errores nuevos: `solicitud-invalida`, `token-invalido` y `plantilla-ya-existe`. Pendientes nuevos P-22 y P-23.
 
 **Versión 0.4 (2026-11-18).** Resuelve P-20: cada nivel del [criterio de adopción](#criterio-de-adopcion) pide solo pruebas de las historias de ese nivel o de los anteriores ([ADR-0013](../adr/0013-pruebas-de-cada-nivel.md)). Una escuela que adopta solo constancias ya puede declarar cualquier nivel sin la credencial ni la puerta. ESC-19 pasa del nivel 1 al 2, porque su prueba necesita la sesión de ESC-61. Agrega C-58 (llaves publicadas, ESC-63), C-59 (el rol `alumno` no puede activar, ESC-19) y C-60 (lo emitido con una versión anterior de la plantilla sigue válido). C-32 ya no comprueba la verificación: eso pasó a C-60.
 
@@ -17,7 +19,7 @@ estado: borrador
 
 ## Alcance y convenciones
 
-ESP-CON v0.4 cubre el subsistema **Constancias y verificación**: emitir constancias de estudios en autoservicio, verificarlas por QR e invalidarlas. Usa cuatro historias del subsistema **Identidad y acceso a la plataforma** (ESP-IDP): padrón importado (ESC-44), roles mínimos (ESC-19), llaves de firma (ESC-63) e identificación sin contraseña (ESC-61). No requiere la credencial ni la puerta: el [criterio de adopción](#criterio-de-adopcion) dice qué pruebas pide de Identidad.
+ESP-CON v0.5 cubre el subsistema **Constancias y verificación**: emitir constancias de estudios en autoservicio, verificarlas por QR e invalidarlas. Usa cuatro historias del subsistema **Identidad y acceso a la plataforma** (ESP-IDP): padrón importado (ESC-44), roles mínimos (ESC-19), llaves de firma (ESC-63) e identificación sin contraseña (ESC-61). No requiere la credencial ni la puerta: el [criterio de adopción](#criterio-de-adopcion) dice qué pruebas pide de Identidad.
 
 **Palabras normativas** (con el sentido de RFC 2119): **DEBE** es obligatorio. **DEBERÍA** es recomendado. **PUEDE** es opcional.
 
@@ -94,7 +96,7 @@ Una constancia es un JWS (JSON Web Signature) con algoritmo EdDSA, igual que la 
 | `iss` | string | Id del plantel. |
 | `iat` | number | Momento de emisión (epoch UTC). |
 | `exp` | number | Vencimiento (fin del ciclo escolar, epoch UTC). |
-| `typ` | string | Tipo de constancia. En v0.4 solo existe `estudios`. |
+| `typ` | string | Tipo de constancia. En v0.5 solo existe `estudios`. |
 | `sub` | string | Id opaco del alumno. |
 | `plantilla` | string | `{id}@{version}` de la plantilla usada. |
 | `datos` | object | Campos del alumno según la plantilla (nombre, CURP, matrícula, semestre, grupo, turno, ciclo). |
@@ -182,7 +184,7 @@ El sistema no guarda contraseñas. Para identificarse, el usuario recibe un cód
 
 **Entrega y límites (ADR-009)**
 
-- `POST /v0/auth/codigo` responde siempre 202 con el mismo cuerpo, exista o no la matrícula. Si existe, el texto muestra el contacto enmascarado. Así no se puede sondear el padrón.
+- `POST /v0/auth/codigo` responde siempre 202 con exactamente el mismo cuerpo, exista o no la matrícula: un mensaje genérico que no muestra el contacto, ni enmascarado ([ADR-0015](../adr/0015-codigo-sin-contacto-en-respuesta.md), que reemplaza el punto 4 de ADR-0009). Así no se puede sondear el padrón.
 - Como mucho 3 solicitudes por matrícula cada 15 minutos y 20 por IP cada hora; al pasarse responde 429 `demasiadas-solicitudes`.
 - Pedir un código nuevo invalida el anterior.
 - El JWT de sesión dura 30 minutos (configurable).
@@ -192,7 +194,9 @@ El sistema no guarda contraseñas. Para identificarse, el usuario recibe un cód
 
 ## API
 
-La API tiene prefijo `/v0`. Todos los endpoints autenticados requieren el header `Authorization: Bearer {token}`. La verificación por QR (`GET /v0/verificar/{folio}`) es pública.
+La API tiene prefijo `/v0`. Todos los endpoints autenticados requieren el header `Authorization: Bearer {token}`; sin token, o con uno vencido, responden 401 `token-invalido`. Son públicas `POST /v0/auth/codigo`, `POST /v0/auth/sesion`, la verificación por QR (`GET /v0/verificar/{folio}`) y las llaves (`GET /v0/llaves`).
+
+Las tablas de abajo resumen la API. Los cuerpos de cada solicitud y respuesta, y todos sus errores, están en el contrato `contratos/openapi.yaml`, que manda en el detalle: cada ruta dice ahí qué historias atiende (`x-historias`) y qué pruebas la llaman (`x-pruebas`).
 
 **Auth**
 
@@ -206,16 +210,16 @@ La API tiene prefijo `/v0`. Todos los endpoints autenticados requieren el header
 
 | Método | Ruta | Descripción | Historia |
 | --- | --- | --- | --- |
-| `GET` | `/v0/plantillas` | Listar plantillas vigentes. | ESC-08 |
-| `POST` | `/v0/plantillas` | Crear plantilla con un `id` nuevo (versión 1). Requiere rol `control_escolar`. | ESC-08 |
-| `GET` | `/v0/plantillas/{id}` | Obtener una plantilla (versión activa). | ESC-08 |
+| `GET` | `/v0/plantillas` | Listar plantillas vigentes. Requiere sesión, con cualquier rol. | ESC-08 |
+| `POST` | `/v0/plantillas` | Crear plantilla con un `id` nuevo (versión 1). Requiere rol `control_escolar`. Si el `id` ya existe responde 409 `plantilla-ya-existe`. | ESC-08 |
+| `GET` | `/v0/plantillas/{id}` | Obtener una plantilla (versión activa). Requiere sesión, con cualquier rol. | ESC-08 |
 | `PUT` | `/v0/plantillas/{id}` | Crear la versión siguiente; la anterior queda `activa: false`. Requiere rol `control_escolar`. | ESC-08 |
 
 **Constancias**
 
 | Método | Ruta | Descripción | Historia |
 | --- | --- | --- | --- |
-| `POST` | `/v0/constancias` | Emitir constancia. Body: `{"plantilla_id": "constancia-estudios"}`. Requiere sesión activa; el `sub` viene del token. | ESC-05 |
+| `POST` | `/v0/constancias` | Emitir constancia. Body: `{"plantilla_id": "constancia-estudios"}`. Requiere sesión con el rol `alumno`; el `sub` viene del token. | ESC-05 |
 | `GET` | `/v0/constancias/{folio}` | Obtener la JWS de la constancia. Solo el alumno dueño del folio (el `sub` del token es el de la constancia) o el rol `control_escolar`; cualquier otro recibe 403 `sin-permiso`. | ESC-05 |
 | `GET` | `/v0/constancias/{folio}/pdf` | Descargar el PDF firmado. Mismo permiso que la ruta anterior. | ESC-05 |
 | `GET` | `/v0/verificar/{folio}` | Verificación pública. Sin autenticación. Respuestas en [Respuesta de verificación](#respuesta-de-verificacion). | ESC-07 |
@@ -224,7 +228,7 @@ La API tiene prefijo `/v0`. Todos los endpoints autenticados requieren el header
 **Reglas comunes**
 
 - Los errores van en Problem Details (RFC 9457), campo `type` con URL estable.
-- Las respuestas exitosas de emisión incluyen el folio y la URL de descarga del PDF.
+- Las respuestas exitosas de emisión incluyen el folio, la JWS y la URL de descarga del PDF.
 - El servidor DEBE responder en menos de 60 segundos para ESC-05 (objetivo: menos de 5).
 - Una plantilla vencida en `POST /v0/constancias` responde `422 plantilla-vencida`.
 - Un alumno fuera del padrón en `POST /v0/constancias` responde `403 no-inscrito`.
@@ -245,6 +249,8 @@ Todo error DEBE ir en formato Problem Details (RFC 9457). El campo `type` es una
 
 | Tipo | HTTP | Significado |
 | --- | --- | --- |
+| `solicitud-invalida` | 400 | El cuerpo no cumple con el esquema del contrato: falta un campo, sobra uno o el tipo no es el correcto. |
+| `token-invalido` | 401 | Falta el token de sesión, venció o no lo firmó este servidor. |
 | `codigo-expirado` | 401 | El código de acceso ya venció. |
 | `codigo-invalido` | 401 | Código incorrecto. |
 | `codigo-bloqueado` | 429 | Demasiados intentos fallidos; pedir código nuevo. |
@@ -252,6 +258,7 @@ Todo error DEBE ir en formato Problem Details (RFC 9457). El campo `type` es una
 | `no-inscrito` | 403 | El alumno existe pero no está inscrito en el ciclo vigente. |
 | `plantilla-vencida` | 422 | La plantilla solicitada ya no está vigente. |
 | `plantilla-no-encontrada` | 404 | El id de plantilla no existe. |
+| `plantilla-ya-existe` | 409 | Se intentó crear con `POST` una plantilla cuyo `id` ya existe; una versión nueva se crea con `PUT`. |
 | `folio-no-encontrado` | 404 | El folio no existe en este plantel. |
 | `constancia-anulada` | 410 | La constancia existe pero fue anulada. |
 | `sin-permiso` | 403 | El rol del solicitante no permite esta operación. |
@@ -263,7 +270,7 @@ Las pruebas C-26 a C-60 cubren este subsistema. Las pruebas C-01 a C-25 pertenec
 
 | ID | Pieza | Dado | Se espera | Historia |
 | --- | --- | --- | --- | --- |
-| C-26 | POST /v0/auth/codigo | matrícula con contacto registrado en padrón | 202; código enviado al contacto, que la respuesta muestra enmascarado | ESC-61 |
+| C-26 | POST /v0/auth/codigo | matrícula con contacto registrado en padrón | 202; código enviado al contacto registrado; la respuesta no muestra el contacto (ADR-0015) | ESC-61 |
 | C-27 | POST /v0/auth/sesion | código correcto dentro de 10 min | 200; JWT de sesión con `roles: ["alumno"]` y los claims de ESP-IDP | ESC-61 |
 | C-28 | POST /v0/auth/sesion | código correcto después de 10 min | 401 `codigo-expirado` | ESC-61 |
 | C-29 | POST /v0/auth/sesion | código incorrecto en el 3.° intento | 429 `codigo-bloqueado` | ESC-61 |
@@ -443,7 +450,7 @@ avance = pasos del siguiente nivel terminados ÷ pasos del siguiente nivel
 
 El avance no cambia el nivel declarado: un plantel sigue en nivel 2 hasta terminar todos los pasos del nivel 3.
 
-## Fuera de v0.4 y preguntas abiertas
+## Fuera de v0.5 y preguntas abiertas
 
 ### No incluido en esta versión
 

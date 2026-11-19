@@ -2,6 +2,20 @@
 
 Formato: una sección por etiqueta publicada.
 
+## esp-con-v0.5.0 — 2026-11-18
+
+Versión menor: el contrato OpenAPI queda completo y ESP-CON fija lo que faltaba para escribirlo. Cambia C-26.
+
+- #20 Publicar el estándar con la licencia AGPL-3.0:
+  - LICENSE con el texto oficial de la AGPL v3.0 y ADR-0014 (todo el repositorio, AGPL-3.0-or-later).
+  - README con encabezado SPDX y sección «Licencia». No cambia ninguna especificación.
+- #21 Escribir el contrato OpenAPI del MVP de constancias (ESP-CON 0.5):
+  - `contratos/openapi.yaml` (contrato 0.3.0, OpenAPI 3.1): las 12 operaciones de ESP-CON y `GET /v0/llaves`, con esquemas, errores y, en cada ruta, `x-especificacion`, `x-historias`, `x-pruebas` y `x-roles`. Cubre C-26 a C-60.
+  - ADR-0015: pedir un código responde un mensaje genérico, sin el contacto; reemplaza el punto 4 de ADR-0009. Cambia C-26.
+  - ESP-CON 0.5: emitir pide el rol `alumno`; errores nuevos `solicitud-invalida`, `token-invalido` y `plantilla-ya-existe`.
+  - Resuelve P-06 y P-17. Pendientes nuevos P-22 y P-23.
+  - El CI valida el contrato con `openapi-spec-validator`.
+
 ## esp-con-v0.4.0 — 2026-11-17
 
 Versión menor: cambia qué pruebas pide cada nivel del criterio de adopción. No cambia lo que hace una implementación.
